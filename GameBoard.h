@@ -9,7 +9,11 @@ namespace GameBoard
 
 
 
-
+	public:
+		
+		BoardSpace GetSpace(int row, int column);
+		void SetSpace(int row, int column, char playerSymbol);
+		GameBoard GetCurrentGameBoard();
 	};
 
 

@@ -18,6 +18,12 @@
     <ClCompile Include="TicTacToe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BoardSpace.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBoard.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">

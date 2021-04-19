@@ -1,9 +1,12 @@
+
 namespace GameBoard
 {
+	
 	struct BoardSpace
 	{
 
-		char value;
+		char value = '-';
+		bool canPlace = true;
 
 	};
 }
