@@ -34,6 +34,7 @@ namespace Game
 		void EndTurn();
 		bool IsThereWinner();
 		void ChangeGameState(GameState state);
+		void SetCurrentTurn(Player player);
 
 		/// <summary>
 		/// Randomize the starting player

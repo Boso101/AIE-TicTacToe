@@ -21,13 +21,13 @@ void Game::EndTurn()
 	if (currentTurn == Player::PLAYER_1)
 	{
 		// Player 1's turn has ended
-		currentTurn = Player::PLAYER_2;
+		SetCurrentTurn(Player::PLAYER_2);
 		ChangeGameState(GameState::PLAYER_2_INPUT);
 	}
 	else	
 	{ 
 		// Player 2's turn has ended
-		currentTurn = Player::PLAYER_1;
+		SetCurrentTurn(Player::PLAYER_1);
 		ChangeGameState(GameState::PLAYER_1_INPUT);
 
 	
@@ -135,7 +135,10 @@ void Game::SetStartingPlayer()
 	
 }
 
-
+void Game::SetCurrentTurn(Player p)
+{
+	currentTurn = p;
+}
 
 
 }
