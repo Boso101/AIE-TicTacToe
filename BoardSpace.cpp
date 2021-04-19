@@ -1,6 +1,7 @@
-#include "BoardSpace.h"
+#include "BoardSlot.h"
+#include <string>
 
-char GameBoard::BoardSlot::ToString()
+std::string GameBoard::BoardSlot::ToString()
 {
 	return this->value;
 }
