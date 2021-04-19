@@ -8,7 +8,10 @@ namespace Game
 {
 	/// <summary>
 	/// The main game, will be created in the main function and 
-	/// is in charge of controlling the game flow
+	/// is in charge of controlling the game flow.
+	/// 
+	/// To make use out of it, Create 2 PlayerConfig variables and then assign 
+	/// the player1 and player2 variables to them
 	/// </summary>
 	struct Game
 	{
@@ -28,6 +31,7 @@ namespace Game
 		void PrintGameState();
 		void PlaceSymbol(PlayerConfig currentPlayer, int row, int column);
 		void EndTurn();
+		bool IsThereWinner();
 
 
 	};

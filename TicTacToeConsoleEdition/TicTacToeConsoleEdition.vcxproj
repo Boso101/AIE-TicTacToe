@@ -20,14 +20,14 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{E007C30E-B6A6-4B3C-BA8D-9ADF83EAB071}</ProjectGuid>
+    <ProjectGuid>{DF1029AA-3EF5-4ABC-B1EA-9763E06A35F4}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TicTacToe</RootNamespace>
+    <RootNamespace>TicTacToeConsoleEdition</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -147,18 +147,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoardSlot.cpp" />
-    <ClCompile Include="BoardSlot.h" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameBoard.cpp" />
-    <ClCompile Include="GameBoard.h" />
-    <ClCompile Include="TicTacToe.cpp" />
+    <ClCompile Include="TicTacToeConsoleEdition.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerConfig.h" />
+    <ProjectReference Include="..\AIE-TicTacToe\TicTacToe.vcxproj">
+      <Project>{e007c30e-b6a6-4b3c-ba8d-9adf83eab071}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TicTacToe.vcxproj">
+      <Project>{e007c30e-b6a6-4b3c-ba8d-9adf83eab071}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

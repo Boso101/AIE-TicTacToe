@@ -3,7 +3,7 @@ namespace Game
 {
 
 
-	enum Player
+	enum class Player
 	{
 		PLAYER_1,
 		PLAYER_2,

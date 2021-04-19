@@ -23,12 +23,12 @@ void Game::EndTurn()
 
 void Game::Print(std::string words)
 {
-	std::cout << words << std::endl;
+	std::cout << words;
 }
 
 void Game::Print(char word)
 {
-	std::cout << word << std::endl;
+	std::cout << word;
 }
 
 void Game::PrintGameState()
@@ -50,6 +50,38 @@ void Game::PrintGameState()
 
 	
 
+
+}
+
+bool Game::IsThereWinner()
+{
+	// Check all possibles win cons
+	return false;
+}
+
+void Game::PlaceSymbol(PlayerConfig currentPlayer, int row, int column)
+{
+
+	// Get the passed BoardSlot
+	GameBoard::BoardSlot slot = board.GetSpace(row, column);
+
+	// Can we place here
+	if (slot.CanPlace())
+	{
+
+		// We can so lets place players symbol here
+		slot.owner = currentPlayer.playerID;
+		slot.value = currentPlayer.playerSymbol;
+
+		// Then end the players turn
+		this->EndTurn();
+
+	}
+	else
+	{
+		Print("Cannot place in this spot");
+
+	}
 
 }
 }
