@@ -20,7 +20,7 @@ namespace Game
 		PlayerConfig player1;
 		PlayerConfig player2;
 
-		Player currentTurn;
+		PlayerConfig currentTurn;
 		GameState currentState;
 
 		bool running = true;
@@ -34,7 +34,7 @@ namespace Game
 		void EndTurn();
 		bool IsThereWinner();
 		void ChangeGameState(GameState state);
-		void SetCurrentTurn(Player player);
+		void SetCurrentTurn(PlayerConfig player);
 
 		/// <summary>
 		/// Randomize the starting player

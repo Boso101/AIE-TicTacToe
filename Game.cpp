@@ -18,16 +18,16 @@ namespace Game
 
 void Game::EndTurn()
 {
-	if (currentTurn == Player::PLAYER_1)
+	if (currentTurn == player1)
 	{
 		// Player 1's turn has ended
-		SetCurrentTurn(Player::PLAYER_2);
+		SetCurrentTurn(player2);
 		ChangeGameState(GameState::PLAYER_2_INPUT);
 	}
 	else	
 	{ 
 		// Player 2's turn has ended
-		SetCurrentTurn(Player::PLAYER_1);
+		SetCurrentTurn(player1);
 		ChangeGameState(GameState::PLAYER_1_INPUT);
 
 	
@@ -119,13 +119,13 @@ void Game::SetStartingPlayer()
 
 	if (randomValue == 0)
 	{
-		currentTurn = Player::PLAYER_1;
+		SetCurrentTurn(player1);
 		ChangeGameState(GameState::PLAYER_1_INPUT);
 	}
 
 	else
 	{
-		currentTurn == Player::PLAYER_2;
+		SetCurrentTurn(player2);
 		ChangeGameState(GameState::PLAYER_2_INPUT);
 
 	}
@@ -135,7 +135,7 @@ void Game::SetStartingPlayer()
 	
 }
 
-void Game::SetCurrentTurn(Player p)
+void Game::SetCurrentTurn(PlayerConfig p)
 {
 	currentTurn = p;
 }

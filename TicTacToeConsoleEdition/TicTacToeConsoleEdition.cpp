@@ -71,9 +71,10 @@ int main()
             // Trap in here while we give input
             while (true)
             {
+                // if statement that holds whatever the user types
+                mainGame.PlaceSymbol(mainGame.currentTurn, 0, 0);
 
             }
-            mainGame.EndTurn();
             break;
         }
 
