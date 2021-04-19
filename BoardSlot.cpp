@@ -6,6 +6,8 @@ bool GameBoard::BoardSlot::CanPlace()
 	{
 		return true;
 	}
+
+	return false;
 }
 
 char GameBoard::BoardSlot::ToString()
