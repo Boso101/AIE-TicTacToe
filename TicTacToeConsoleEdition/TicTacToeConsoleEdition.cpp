@@ -40,26 +40,18 @@ int main()
     {
         switch (mainGame.currentState)
         {
-        case Game::GameState::DECIDE_START_PLAYER:
-            {
-            mainGame.SetStartingPlayer();
 
-            //Concat current turn player I guess
-        
-            break;
-            }
             // On game start
         case Game::GameState::GAME_START:
         {
             //print the current board
-            mainGame.PrintGameState();
+            mainGame.PrintLine("Game Launched");
 
             //Decide who goes first
 
             //Set that to the current player
 
             //Change Start
-            mainGame.ChangeGameState(Game::GameState::DECIDE_START_PLAYER);
             break;
         }
 
@@ -72,6 +64,10 @@ int main()
         // When it is player 1's turn
         case Game::GameState::PLAYER_1_INPUT:
         {
+            // Print game state before we make a move
+
+            mainGame.PrintGameState();
+
             // Trap in here while we give input
             while (true)
             {
