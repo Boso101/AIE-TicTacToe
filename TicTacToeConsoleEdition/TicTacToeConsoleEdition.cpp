@@ -8,7 +8,10 @@
 
 /// <summary>
 /// Console version of the game 
-/// using the TicTacToe library just made
+/// using the TicTacToe library just made.
+/// 
+/// If for whatever reasons errors occur, then make sure to 
+/// set TicTacToeGame type to Static Library
 /// </summary>
 /// <returns></returns>
 int main()
