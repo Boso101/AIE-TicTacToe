@@ -1,5 +1,7 @@
-#include "BoardSpace.h"
+#pragma once
+
 #include "Player.h"
+#include "BoardSlot.h"
 namespace GameBoard
 {
 	/// <summary>
@@ -15,6 +17,7 @@ namespace GameBoard
 
 
 	public:
+		// Use these so that for loops can read them readonly
 		const int ROWS = 3;
 		const int COLUMNS = 3;
 		

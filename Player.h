@@ -1,3 +1,4 @@
+#pragma once
 namespace Game
 {
 
@@ -6,7 +7,7 @@ namespace Game
 	{
 		PLAYER_1,
 		PLAYER_2,
-		EMPTY
+		EMPTY = -1
 
 
 
