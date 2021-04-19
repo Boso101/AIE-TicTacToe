@@ -1,3 +1,4 @@
+#include <string>
 
 namespace GameBoard
 {
@@ -11,5 +12,7 @@ namespace GameBoard
 		char value = '-';
 		bool canPlace = true;
 
+
+		char ToString();
 	};
 }
