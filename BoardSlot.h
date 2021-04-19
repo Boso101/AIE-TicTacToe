@@ -22,8 +22,7 @@ namespace GameBoard
 		/// <summary>
 		/// Can the player who is trying to place something actually place in this slot
 		/// </summary>
-		/// <param name="whoPlacing"></param>
 		/// <returns> boolean on whether or not the player can take this spot</returns>
-		bool CanPlace(Game::Player whoPlacing);
+		bool CanPlace();
 	};
 }
