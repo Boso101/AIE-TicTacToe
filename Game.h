@@ -1,0 +1,13 @@
+namespace Game
+{
+
+	struct Game
+	{
+
+
+
+
+	};
+
+
+}
