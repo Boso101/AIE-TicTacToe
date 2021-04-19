@@ -1,9 +1,14 @@
 #include "Game.h"
 #include "Player.h"
 #include <iostream>
+#include <time.h>
 namespace Game
 {
-
+	Game::Game()
+	{
+		// setup the rng seed 
+		srand(time(NULL));
+	}
 
 void Game::EndTurn()
 {
@@ -120,6 +125,8 @@ void Game::SetStartingPlayer()
 	}
 	
 }
+
+
 
 
 }

@@ -40,6 +40,9 @@ namespace Game
 		/// </summary>
 		void SetStartingPlayer();
 
+		//Constructor
+		Game();
+
 
 	};
 
