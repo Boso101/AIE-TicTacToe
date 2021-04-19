@@ -2,8 +2,7 @@
 
 #include "Player.h"
 #include "BoardSlot.h"
-namespace GameBoard
-{
+
 	/// <summary>
 	/// The main gameboard class. Contains functions to do with the gameboard
 	/// such as Setting a Space, Getting a space, etc.
@@ -27,5 +26,3 @@ namespace GameBoard
 
 
 
-
-}

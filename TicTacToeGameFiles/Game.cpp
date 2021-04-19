@@ -2,8 +2,7 @@
 #include "Player.h"
 #include <iostream>
 #include <time.h>
-namespace Game
-{
+
 	Game::Game(PlayerConfig p1, PlayerConfig p2)
 	{
 		// setup the rng seed 
@@ -18,16 +17,16 @@ namespace Game
 
 void Game::EndTurn()
 {
-	if (currentTurn == player1)
+	if (currentTurn == player1.playerID)
 	{
 		// Player 1's turn has ended
-		SetCurrentTurn(player2);
+		SetCurrentTurn(Player::PLAYER_2);
 		ChangeGameState(GameState::PLAYER_2_INPUT);
 	}
 	else	
 	{ 
 		// Player 2's turn has ended
-		SetCurrentTurn(player1);
+		SetCurrentTurn(Player::PLAYER_1);
 		ChangeGameState(GameState::PLAYER_1_INPUT);
 
 	
@@ -75,11 +74,24 @@ bool Game::IsThereWinner()
 	return false;
 }
 
-void Game::PlaceSymbol(PlayerConfig currentPlayer, int row, int column)
+void Game::PlaceSymbol( int row, int column)
 {
+	//Get Current Player
+	PlayerConfig currentPlayer;
+
+	//TODO: Probably change
+	if (currentTurn == Player::PLAYER_1)
+	{
+		currentPlayer = player1;
+	}
+	else
+	{
+		currentPlayer = player2;
+
+	}
 
 	// Get the passed BoardSlot
-	GameBoard::BoardSlot slot = board.GetSpace(row, column);
+	BoardSlot slot = board.GetSpace(row, column);
 
 	// Can we place here
 	if (slot.CanPlace())
@@ -93,6 +105,10 @@ void Game::PlaceSymbol(PlayerConfig currentPlayer, int row, int column)
 		if (IsThereWinner())
 		{
 			// Do stuff
+
+
+
+			return;
 
 		}
 
@@ -119,13 +135,13 @@ void Game::SetStartingPlayer()
 
 	if (randomValue == 0)
 	{
-		SetCurrentTurn(player1);
+		SetCurrentTurn(Player::PLAYER_1);
 		ChangeGameState(GameState::PLAYER_1_INPUT);
 	}
 
 	else
 	{
-		SetCurrentTurn(player2);
+		SetCurrentTurn(Player::PLAYER_2);
 		ChangeGameState(GameState::PLAYER_2_INPUT);
 
 	}
@@ -135,10 +151,9 @@ void Game::SetStartingPlayer()
 	
 }
 
-void Game::SetCurrentTurn(PlayerConfig p)
+void Game::SetCurrentTurn(Player p)
 {
 	currentTurn = p;
 }
 
 
-}

@@ -1,7 +1,6 @@
 #pragma once
 
-namespace Game
-{
+
 	enum class GameState
 	{
 		PLAYER_1_INPUT,
@@ -25,4 +24,3 @@ namespace Game
 
 
 
-}

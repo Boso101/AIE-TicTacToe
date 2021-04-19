@@ -4,8 +4,7 @@
 #include "PlayerConfig.h"
 #include <string>
 #include "GameState.h"
-namespace Game
-{
+
 	/// <summary>
 	/// The main game, will be created in the main function and 
 	/// is in charge of controlling the game flow.
@@ -15,12 +14,12 @@ namespace Game
 	/// </summary>
 	struct Game
 	{
-		GameBoard::GameBoard board;
+		GameBoard board;
 		
 		PlayerConfig player1;
 		PlayerConfig player2;
 
-		PlayerConfig currentTurn;
+		Player currentTurn;
 		GameState currentState;
 
 		bool running = true;
@@ -30,11 +29,11 @@ namespace Game
 		void PrintLine(std::string words);
 		void Print(char word);
 		void PrintGameState();
-		void PlaceSymbol(PlayerConfig currentPlayer, int row, int column);
+		void PlaceSymbol(int row, int column);
 		void EndTurn();
 		bool IsThereWinner();
 		void ChangeGameState(GameState state);
-		void SetCurrentTurn(PlayerConfig player);
+		void SetCurrentTurn(Player player);
 
 		/// <summary>
 		/// Randomize the starting player
@@ -46,6 +45,3 @@ namespace Game
 
 
 	};
-
-
-}

@@ -3,8 +3,7 @@
 #include <string>
 #include "Player.h"
 
-namespace GameBoard
-{
+
 	/// <summary>
 	/// A struct that the game board is made up of.
 	/// It holds whatever a player places in the spot.
@@ -16,7 +15,7 @@ namespace GameBoard
 		
 		
 		// Make this slot belong to nobody
-		Game::Player owner = Game::Player::EMPTY;
+		Player owner =Player::EMPTY;
 
 
 		char ToString();
@@ -27,4 +26,3 @@ namespace GameBoard
 		/// <returns> boolean on whether or not the player can take this spot</returns>
 		bool CanPlace();
 	};
-}

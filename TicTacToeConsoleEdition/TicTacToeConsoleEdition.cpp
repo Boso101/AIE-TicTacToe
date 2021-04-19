@@ -2,8 +2,9 @@
 //
 
 #include <iostream>
-#include "../PlayerConfig.h"
-#include "../Game.h"
+#include "../TicTacToeGameFiles/PlayerConfig.h"
+#include "../TicTacToeGameFiles/GameState.h"
+#include "../TicTacToeGameFiles/Game.h"
 
 /// <summary>
 /// Console version of the game 
@@ -13,24 +14,24 @@
 int main()
 {
     //Setup players
-    Game::PlayerConfig p1
+   PlayerConfig p1
     {
-       Game::Player::PLAYER_1,
+       Player::PLAYER_1,
        'O'
 
 
     };
 
-    Game::PlayerConfig p2
+    PlayerConfig p2
     {
-       Game::Player::PLAYER_2,
+       Player::PLAYER_2,
        'X'
 
 
     };
     // Init the Main Game
 
-    Game::Game mainGame(p1,p2);
+    Game mainGame(p1,p2);
     mainGame.player1 = p1;
     mainGame.player2 = p2;
 
@@ -42,7 +43,7 @@ int main()
         {
 
             // On game start
-        case Game::GameState::GAME_START:
+        case GameState::GAME_START:
         {
             //print the current board
             mainGame.PrintLine("Game Launched");
@@ -56,13 +57,13 @@ int main()
         }
 
         // Once we finish a game
-        case Game::GameState::FINISH:
+        case GameState::FINISH:
         {
             break;
         }
 
         // When it is player 1's turn
-        case Game::GameState::PLAYER_1_INPUT:
+        case GameState::PLAYER_1_INPUT:
         {
             // Print game state before we make a move
 
@@ -72,14 +73,14 @@ int main()
             while (true)
             {
                 // if statement that holds whatever the user types
-                mainGame.PlaceSymbol(mainGame.currentTurn, 0, 0);
+                mainGame.PlaceSymbol( 0, 0);
 
             }
             break;
         }
 
         // When it is player 2's turn
-        case Game::GameState::PLAYER_2_INPUT:
+        case GameState::PLAYER_2_INPUT:
         {
 
 

@@ -1,6 +1,4 @@
 #pragma once
-namespace Game
-{
 
 
 	enum class Player
@@ -12,4 +10,3 @@ namespace Game
 
 
 	};
-}
