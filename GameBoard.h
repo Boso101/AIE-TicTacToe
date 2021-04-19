@@ -1,6 +1,10 @@
 #include "BoardSpace.h"
 namespace GameBoard
 {
+	/// <summary>
+	/// The main gameboard class. Contains functions to do with the gameboard
+	/// such as Setting a Space, Getting a space, etc.
+	/// </summary>
 	class GameBoard
 	{
 	protected:

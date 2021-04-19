@@ -3,7 +3,10 @@
 #include <string>
 namespace Game
 {
-
+	/// <summary>
+	/// The main game, will be created in the main function and 
+	/// is in charge of controlling the game flow
+	/// </summary>
 	struct Game
 	{
 		GameBoard::GameBoard board;
@@ -12,7 +15,7 @@ namespace Game
 		PlayerConfig player2;
 
 
-
+	
 		void Print(std::string words);
 		void PrintGameState();
 		void PlaceSymbol(PlayerConfig currentPlayer);
