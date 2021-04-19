@@ -37,6 +37,12 @@ int main()
             // On game start
         case Game::GameState::GAME_START:
         {
+            //print the current board
+            mainGame.PrintGameState();
+
+            //Decide who goes first
+
+            //Set that to the current player
             break;
         }
 
@@ -49,6 +55,11 @@ int main()
         // When it is player 1's turn
         case Game::GameState::PLAYER_1_INPUT:
         {
+            // Trap in here while we give input
+            while (true)
+            {
+
+            }
             break;
         }
 
