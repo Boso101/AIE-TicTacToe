@@ -1,3 +1,5 @@
+#pragma once
+
 #include "GameBoard.h"
 #include "PlayerConfig.h"
 #include <string>
@@ -22,8 +24,9 @@ namespace Game
 
 	
 		void Print(std::string words);
+		void Print(char word);
 		void PrintGameState();
-		void PlaceSymbol(PlayerConfig currentPlayer);
+		void PlaceSymbol(PlayerConfig currentPlayer, int row, int column);
 		void EndTurn();
 
 
