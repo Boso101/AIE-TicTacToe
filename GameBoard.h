@@ -9,7 +9,7 @@ namespace GameBoard
 	class GameBoard
 	{
 	protected:
-		BoardSpace theBoard[3][3];
+		BoardSlot theBoard[3][3];
 
 
 
@@ -18,7 +18,7 @@ namespace GameBoard
 		const int ROWS = 3;
 		const int COLUMNS = 3;
 		
-		BoardSpace GetSpace(int row, int column);
+		BoardSlot GetSpace(int row, int column);
 		void SetSpace(int row, int column, char playerSymbol);
 		GameBoard GetCurrentGameBoard();
 	};

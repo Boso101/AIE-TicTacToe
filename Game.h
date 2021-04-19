@@ -18,7 +18,7 @@ namespace Game
 		Player currentTurn;
 		GameState currentState = GameState::GAME_START;
 
-
+		bool running = true;
 
 	
 		void Print(std::string words);
