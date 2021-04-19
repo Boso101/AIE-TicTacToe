@@ -32,6 +32,7 @@ namespace Game
 		void PlaceSymbol(PlayerConfig currentPlayer, int row, int column);
 		void EndTurn();
 		bool IsThereWinner();
+		void ChangeGameState(GameState state);
 
 
 	};

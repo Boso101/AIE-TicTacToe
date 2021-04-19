@@ -11,12 +11,14 @@ void Game::EndTurn()
 	{
 		// Player 1's turn has ended
 		currentTurn = Player::PLAYER_2;
+		ChangeGameState(GameState::PLAYER_2_INPUT);
 	}
 	else	
 	{ 
 		// Player 2's turn has ended
 		currentTurn = Player::PLAYER_1;
-	
+		ChangeGameState(GameState::PLAYER_1_INPUT);
+
 	
 	}
 }
@@ -83,5 +85,10 @@ void Game::PlaceSymbol(PlayerConfig currentPlayer, int row, int column)
 
 	}
 
+}
+
+void Game::ChangeGameState(GameState state)
+{
+	currentState = state;
 }
 }
