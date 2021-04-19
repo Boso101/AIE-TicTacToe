@@ -11,12 +11,19 @@ namespace GameBoard
 	{
 
 		char value = '-';
-		bool canPlace = true;
+		
 		
 		// Make this slot belong to nobody
 		Game::Player owner = Game::Player::EMPTY;
 
 
 		char ToString();
+
+		/// <summary>
+		/// Can the player who is trying to place something actually place in this slot
+		/// </summary>
+		/// <param name="whoPlacing"></param>
+		/// <returns> boolean on whether or not the player can take this spot</returns>
+		bool CanPlace(Game::Player whoPlacing);
 	};
 }

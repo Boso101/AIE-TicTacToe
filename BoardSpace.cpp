@@ -1,6 +1,6 @@
 #include "BoardSpace.h"
 
-char GameBoard::BoardSpace::ToString()
+char GameBoard::BoardSlot::ToString()
 {
 	return this->value;
 }
