@@ -2,19 +2,64 @@
 //
 
 #include <iostream>
+#include "Game.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    //Setup players
+    Game::PlayerConfig p1
+    {
+       Game::Player::PLAYER_1,
+       'O'
+
+
+    };
+
+    Game::PlayerConfig p2
+    {
+       Game::Player::PLAYER_2,
+       'X'
+
+
+    };
+    // Init the Main Game
+
+    Game::Game mainGame;
+    mainGame.player1 = p1;
+    mainGame.player2 = p2;
+
+    // Main Loop
+
+    while (mainGame.running)
+    {
+        switch (mainGame.currentState)
+        {
+            // On game start
+        case Game::GameState::GAME_START:
+        {
+            break;
+        }
+
+        // Once we finish a game
+        case Game::GameState::FINISH:
+        {
+            break;
+        }
+
+        // When it is player 1's turn
+        case Game::GameState::PLAYER_1_INPUT:
+        {
+            break;
+        }
+
+        // When it is player 2's turn
+        case Game::GameState::PLAYER_2_INPUT:
+        {
+            break;
+        }
+      
+        }
+    }
+
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
