@@ -1,6 +1,7 @@
 #include "GameBoard.h"
 #include "PlayerConfig.h"
 #include <string>
+#include "GameState.h"
 namespace Game
 {
 	/// <summary>
@@ -15,6 +16,7 @@ namespace Game
 		PlayerConfig player2;
 
 		Player currentTurn;
+		GameState currentState = GameState::GAME_START;
 
 
 
