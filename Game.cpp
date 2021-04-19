@@ -26,19 +26,25 @@ void Game::Print(std::string words)
 	std::cout << words << std::endl;
 }
 
+void Game::Print(char word)
+{
+	std::cout << word << std::endl;
+}
+
 void Game::PrintGameState()
 {
 	// Empty string
-	std::string gameString = "";
+	
 
 	// nested for loop into board
 
 	for (int i = 0; i < board.ROWS - 1; i++)
 	{
+		Print("\n");
 		for (int j = 0; j < board.COLUMNS; j++)
 		{
 
-			gameString << board.GetSpace(j, i);
+          Print(board.GetSpace(j, i).ToString());
 		}
 	}
 
