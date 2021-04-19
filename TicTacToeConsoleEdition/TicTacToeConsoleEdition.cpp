@@ -30,7 +30,7 @@ int main()
     };
     // Init the Main Game
 
-    Game::Game mainGame;
+    Game::Game mainGame(p1,p2);
     mainGame.player1 = p1;
     mainGame.player2 = p2;
 
@@ -45,8 +45,7 @@ int main()
             mainGame.SetStartingPlayer();
 
             //Concat current turn player I guess
-            mainGame.PrintLine("");
-            mainGame.PrintLine("Starting Player :");
+        
             break;
             }
             // On game start

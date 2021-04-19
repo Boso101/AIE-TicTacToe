@@ -4,10 +4,16 @@
 #include <time.h>
 namespace Game
 {
-	Game::Game()
+	Game::Game(PlayerConfig p1, PlayerConfig p2)
 	{
 		// setup the rng seed 
+		currentState = GameState::GAME_START;
+
+		player1 = p1;
+		player2 = p2;
+
 		srand(time(NULL));
+		SetStartingPlayer();
 	}
 
 void Game::EndTurn()
@@ -123,6 +129,9 @@ void Game::SetStartingPlayer()
 		ChangeGameState(GameState::PLAYER_2_INPUT);
 
 	}
+
+	PrintLine("");
+	PrintLine("Starting Player :");
 	
 }
 

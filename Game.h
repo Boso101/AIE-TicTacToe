@@ -21,7 +21,7 @@ namespace Game
 		PlayerConfig player2;
 
 		Player currentTurn;
-		GameState currentState = GameState::GAME_START;
+		GameState currentState;
 
 		bool running = true;
 
@@ -41,7 +41,7 @@ namespace Game
 		void SetStartingPlayer();
 
 		//Constructor
-		Game();
+		Game(PlayerConfig p1, PlayerConfig p2);
 
 
 	};
