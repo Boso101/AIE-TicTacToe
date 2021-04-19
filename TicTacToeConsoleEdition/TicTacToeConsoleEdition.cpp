@@ -49,12 +49,10 @@ int main()
         {
             //print the current board
             mainGame.PrintLine("Game Launched");
+            mainGame.SetStartingPlayer();
 
-            //Decide who goes first
+            
 
-            //Set that to the current player
-
-            //Change Start
             break;
         }
 
@@ -75,7 +73,9 @@ int main()
             while (true)
             {
                 // if statement that holds whatever the user types
+                
                 mainGame.PlaceSymbol( 0, 0);
+                break;
 
             }
             break;

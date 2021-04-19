@@ -12,7 +12,6 @@
 		player2 = p2;
 
 		srand(time(NULL));
-		SetStartingPlayer();
 	}
 
 void Game::EndTurn()
@@ -52,6 +51,7 @@ void Game::PrintGameState()
 	
 
 	// nested for loop into board
+	Print("\n");
 
 	for (int i = 0; i < board.ROWS; i++)
 	{
