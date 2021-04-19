@@ -22,7 +22,10 @@ void Game::EndTurn()
 	
 	}
 }
-
+void Game::PrintLine(std::string words)
+{
+	std::cout << "\n" << words << std::endl;
+}
 void Game::Print(std::string words)
 {
 	std::cout << words;
@@ -75,6 +78,13 @@ void Game::PlaceSymbol(PlayerConfig currentPlayer, int row, int column)
 		slot.owner = currentPlayer.playerID;
 		slot.value = currentPlayer.playerSymbol;
 
+		//Check for Winner
+		if (IsThereWinner())
+		{
+			// Do stuff
+
+		}
+
 		// Then end the players turn
 		this->EndTurn();
 
@@ -91,4 +101,25 @@ void Game::ChangeGameState(GameState state)
 {
 	currentState = state;
 }
+
+void Game::SetStartingPlayer()
+{
+	int randomValue = rand() % 1;
+
+	if (randomValue == 0)
+	{
+		currentTurn = Player::PLAYER_1;
+		ChangeGameState(GameState::PLAYER_1_INPUT);
+	}
+
+	else
+	{
+		currentTurn == Player::PLAYER_2;
+		ChangeGameState(GameState::PLAYER_2_INPUT);
+
+	}
+	
+}
+
+
 }

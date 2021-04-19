@@ -40,6 +40,15 @@ int main()
     {
         switch (mainGame.currentState)
         {
+        case Game::GameState::DECIDE_START_PLAYER:
+            {
+            mainGame.SetStartingPlayer();
+
+            //Concat current turn player I guess
+            mainGame.PrintLine("");
+            mainGame.PrintLine("Starting Player :");
+            break;
+            }
             // On game start
         case Game::GameState::GAME_START:
         {

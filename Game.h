@@ -27,12 +27,18 @@ namespace Game
 
 	
 		void Print(std::string words);
+		void PrintLine(std::string words);
 		void Print(char word);
 		void PrintGameState();
 		void PlaceSymbol(PlayerConfig currentPlayer, int row, int column);
 		void EndTurn();
 		bool IsThereWinner();
 		void ChangeGameState(GameState state);
+
+		/// <summary>
+		/// Randomize the starting player
+		/// </summary>
+		void SetStartingPlayer();
 
 
 	};
