@@ -14,6 +14,9 @@ namespace Game
 		PlayerConfig player1;
 		PlayerConfig player2;
 
+		Player currentTurn;
+
+
 
 	
 		void Print(std::string words);

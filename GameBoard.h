@@ -1,4 +1,5 @@
 #include "BoardSpace.h"
+#include "Player.h"
 namespace GameBoard
 {
 	/// <summary>
