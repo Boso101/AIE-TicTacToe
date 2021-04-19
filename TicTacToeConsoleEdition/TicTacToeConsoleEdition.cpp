@@ -49,6 +49,9 @@ int main()
             //Decide who goes first
 
             //Set that to the current player
+
+            //Change Start
+            mainGame.ChangeGameState(Game::GameState::DECIDE_START_PLAYER);
             break;
         }
 
@@ -66,12 +69,16 @@ int main()
             {
 
             }
+            mainGame.EndTurn();
             break;
         }
 
         // When it is player 2's turn
         case Game::GameState::PLAYER_2_INPUT:
         {
+
+
+            mainGame.EndTurn();
             break;
         }
 
