@@ -32,8 +32,7 @@ int main()
     // Init the Main Game
 
     Game mainGame(p1,p2);
-    mainGame.player1 = p1;
-    mainGame.player2 = p2;
+
 
     // Main Loop
 
