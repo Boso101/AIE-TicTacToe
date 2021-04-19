@@ -2,7 +2,7 @@
 
 namespace Game
 {
-	enum GameState
+	enum class GameState
 	{
 		PLAYER_1_INPUT,
 		PLAYER_2_INPUT,

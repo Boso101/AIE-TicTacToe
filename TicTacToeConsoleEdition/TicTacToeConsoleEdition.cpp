@@ -5,6 +5,11 @@
 #include "../PlayerConfig.h"
 #include "../Game.h"
 
+/// <summary>
+/// Console version of the game 
+/// using the TicTacToe library just made
+/// </summary>
+/// <returns></returns>
 int main()
 {
     //Setup players

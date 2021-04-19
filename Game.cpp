@@ -38,7 +38,7 @@ void Game::PrintGameState()
 
 	// nested for loop into board
 
-	for (int i = 0; i < board.ROWS - 1; i++)
+	for (int i = 0; i < board.ROWS; i++)
 	{
 		Print("\n");
 		for (int j = 0; j < board.COLUMNS; j++)

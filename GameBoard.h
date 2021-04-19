@@ -22,7 +22,6 @@ namespace GameBoard
 		const int COLUMNS = 3;
 		
 		BoardSlot GetSpace(int row, int column);
-		void SetSpace(int row, int column, char playerSymbol);
 		GameBoard GetCurrentGameBoard();
 	};
 
