@@ -1,10 +1,11 @@
 #include "Game.h"
 #include "Player.h"
+#include <iostream>
 namespace Game
 {
 
 
-void Game::Game::EndTurn()
+void Game::EndTurn()
 {
 	if (currentTurn == Player::PLAYER_1)
 	{
@@ -18,5 +19,19 @@ void Game::Game::EndTurn()
 	
 	
 	}
+}
+
+void Game::Print(std::string words)
+{
+	std::cout << words << std::endl;
+}
+
+void Game::PrintGameState()
+{
+	// Empty string
+	std::string gameString = "";
+	
+
+
 }
 }
