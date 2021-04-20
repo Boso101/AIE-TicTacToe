@@ -74,12 +74,13 @@ int main()
 
             //User Input
             mainGame.PrintLine("");
+            mainGame.PrintAllFreeSpots();
             int choice = mainGame.UserInputPrompt("Please enter a number correlating to the grid : ");
 
             // + 1 so that the user doesnt start at index 0
             if (choice < 9 && choice >= 0)
             {
-                BoardSlot slot = mainGame.board.ALL_SLOTS[choice];
+                BoardSlot slot = mainGame.GetAllFreeSlots()[choice];
                 mainGame.PlaceSymbol(slot.row, slot.column);
             }
             else

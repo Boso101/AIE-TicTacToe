@@ -182,30 +182,50 @@ void Game::AIAction()
 	{
 		// AI Logic Here
 		// For now iteratively place in the next free spot
-
-		for (BoardSlot slot : board.ALL_SLOTS)
-		{
-			// Find free one then place
-			if (board.GetSpace(slot.row,slot.column).CanPlace())
-			{
-				// Place it
-				PlaceSymbol(slot.row, slot.column);
-				
-				//Job Done
-				return;
-			
-			}
-
-		}
+		BoardSlot slot = GetAllFreeSlots().at(0);
+		PlaceSymbol(slot.row, slot.column);
+		
 
 
 
 
 
-		EndTurn();
 	}
 
 
+}
+//TODO: Not sure if this is very inefficient
+// IDK if it cleans up after each use
+std::vector<BoardSlot> Game::GetAllFreeSlots()
+{
+	std::vector<BoardSlot> listOfSpots;
+	// Loop through and only add free spots
+	
+
+	for (int i = 0; i < board.ROWS; i++)
+	{
+		for (int j = 0; j < board.COLUMNS; j++)
+		{
+			BoardSlot slot = board.GetSpace(j, i);
+			
+			if (slot.CanPlace())
+			{
+				listOfSpots.push_back(slot);
+			}
+
+		}
+	}
+
+	return listOfSpots;
+}
+
+void Game::PrintAllFreeSpots()
+{
+	int size = GetAllFreeSlots().size();
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << "Slot " << i << std::endl;
+	}
 }
 
 int Game::UserInputPrompt(std::string promptMessage)

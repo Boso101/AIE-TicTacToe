@@ -4,6 +4,7 @@
 #include "PlayerConfig.h"
 #include <string>
 #include "GameState.h"
+#include <vector>
 
 	/// <summary>
 	/// The main game, will be created in the main function and 
@@ -36,6 +37,7 @@
 		void SetCurrentTurn(Player player);
 		void AIAction();
 		int UserInputPrompt(std::string prompt);
+		void PrintAllFreeSpots();
 		/// <summary>
 		/// Get the player config of whoevers turn it is
 		/// </summary>
@@ -49,6 +51,8 @@
 
 		//Constructor
 		Game(PlayerConfig p1, PlayerConfig p2);
+
+		std::vector<BoardSlot>  GetAllFreeSlots();
 
 
 	};
