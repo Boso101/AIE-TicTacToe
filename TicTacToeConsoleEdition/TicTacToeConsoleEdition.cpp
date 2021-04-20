@@ -75,12 +75,13 @@ int main()
             //User Input
             mainGame.PrintLine("");
             mainGame.PrintAllFreeSpots();
+            std::vector<BoardSlot> allFreeSlots = mainGame.GetAllFreeSlots();
             int choice = mainGame.UserInputPrompt("Please enter a number correlating to the grid : ");
 
             // + 1 so that the user doesnt start at index 0
-            if (choice < 9 && choice >= 0)
+            if (choice < allFreeSlots.size())
             {
-                BoardSlot slot = mainGame.GetAllFreeSlots()[choice];
+                BoardSlot slot = allFreeSlots.at(choice);
                 mainGame.PlaceSymbol(slot.row, slot.column);
             }
             else

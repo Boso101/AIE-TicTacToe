@@ -77,7 +77,16 @@ void Game::PrintGameState()
 
 bool Game::IsThereWinner()
 {
-	// Check all possibles win cons
+	// Check all possibles win cons.
+	// We at the end of the game
+	if (GetAllFreeSlots().size() == 0)
+	{
+		ChangeGameState(GameState::FINISH);
+		return true;
+	}
+
+	//Check win cons
+
 	return false;
 }
 PlayerConfig Game::GetCurrentPlayer()
@@ -175,6 +184,7 @@ void Game::SetCurrentTurn(Player p)
 void Game::AIAction()
 {
 	PlayerConfig turnPlayer = GetCurrentPlayer();
+	std::vector<BoardSlot> freeSlots = GetAllFreeSlots();
 	
 	//Only run the AI if the game is still going and the playerconfig allows AI
 	
@@ -182,7 +192,7 @@ void Game::AIAction()
 	{
 		// AI Logic Here
 		// For now iteratively place in the next free spot
-		BoardSlot slot = GetAllFreeSlots().at(0);
+		BoardSlot slot = freeSlots.at(0);
 		PlaceSymbol(slot.row, slot.column);
 		
 
