@@ -6,6 +6,7 @@
 	Game::Game(PlayerConfig p1, PlayerConfig p2)
 	{
 		// setup the rng seed 
+		board.SetupBoard(3, 3);
 		currentState = GameState::GAME_START;
 
 		player1 = p1;
@@ -30,10 +31,9 @@ void Game::EndTurn()
 
 	
 	}
+	std::cout << "It is now Player_" << int(GetCurrentPlayer().playerID) << "'s turn." << std::endl;
 
-	//TODO: Maybe dont have this here
-	// AI Begins thinking
-	AIAction();
+
 }
 void Game::PrintLine(std::string words)
 {
@@ -51,7 +51,10 @@ void Game::Print(char word)
 
 void Game::PrintGameState()
 {
-	
+	//Clear the console
+	system("CLS");
+
+	std::cout << "\n" << std::endl;
 	std::cout << "     |     |     " << std::endl;
 	std::cout << "  " << board.GetSpace(0,0).ToString() << "  |  " << board.GetSpace(0, 1).ToString() << "  |  " << board.GetSpace(0,2).ToString() << std::endl;
 
@@ -123,7 +126,8 @@ void Game::PlaceSymbol( int row, int column)
 			return;
 
 		}
-
+		PrintLine("");
+		PrintLine("Successfully Placed ! Ending Turn...");
 		// Then end the players turn
 		EndTurn();
 
@@ -159,7 +163,7 @@ void Game::SetStartingPlayer()
 	}
 
 	PrintLine("");
-	PrintLine("Starting Player :");
+	std::cout << "Current Player : " << (int)GetCurrentPlayer().playerID << std::endl;
 	
 }
 
@@ -173,22 +177,43 @@ void Game::AIAction()
 	PlayerConfig turnPlayer = GetCurrentPlayer();
 	
 	//Only run the AI if the game is still going and the playerconfig allows AI
-	if ( !IsThereWinner() && !turnPlayer.isAI)
-	{
-		return;
-	}
-	else
+	
+	if(!IsThereWinner() && turnPlayer.isAI)
 	{
 		// AI Logic Here
+		// For now iteratively place in the next free spot
+
+		for (BoardSlot slot : board.ALL_SLOTS)
+		{
+			// Find free one then place
+			if (board.GetSpace(slot.row,slot.column).CanPlace())
+			{
+				// Place it
+				PlaceSymbol(slot.row, slot.column);
+				
+				//Job Done
+				return;
+			
+			}
+
+		}
 
 
 
 
 
-
-		
+		EndTurn();
 	}
 
+
+}
+
+int Game::UserInputPrompt(std::string promptMessage)
+{
+	int userResponse;
+	std::cout << promptMessage;
+	std::cin >> userResponse;
+	return userResponse;
 }
 
 

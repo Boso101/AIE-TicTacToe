@@ -14,3 +14,9 @@ char BoardSlot::ToString()
 {
 	return this->value;
 }
+
+void BoardSlot::SetPosition(int row, int column)
+{
+	this->row = row;
+	this->column = column;
+}

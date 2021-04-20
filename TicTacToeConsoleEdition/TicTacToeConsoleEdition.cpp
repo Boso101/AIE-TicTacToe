@@ -20,7 +20,8 @@ int main()
    PlayerConfig p1
     {
        Player::PLAYER_1,
-       'O'
+       'O',
+       false
 
 
     };
@@ -28,7 +29,8 @@ int main()
     PlayerConfig p2
     {
        Player::PLAYER_2,
-       'X'
+       'X',
+       true
 
 
     };
@@ -65,19 +67,29 @@ int main()
         // When it is player 1's turn
         case GameState::PLAYER_1_INPUT:
         {
+            mainGame.AIAction();
             // Print game state before we make a move
 
             mainGame.PrintGameState();
 
-            // Trap in here while we give input
-            while (true)
-            {
-                // if statement that holds whatever the user types
-                
-                mainGame.PlaceSymbol( 0, 0);
-                break;
+            //User Input
+            mainGame.PrintLine("");
+            int choice = mainGame.UserInputPrompt("Please enter a number correlating to the grid : ");
 
+            // + 1 so that the user doesnt start at index 0
+            if (choice < 9 && choice >= 0)
+            {
+                BoardSlot slot = mainGame.board.ALL_SLOTS[choice];
+                mainGame.PlaceSymbol(slot.row, slot.column);
             }
+            else
+            {
+                std::cout << "Please enter a number between 0 and 8";
+            }
+            
+            break;
+
+         
             break;
         }
 
@@ -85,8 +97,10 @@ int main()
         case GameState::PLAYER_2_INPUT:
         {
 
+            mainGame.AIAction();
+            mainGame.PrintGameState();
 
-            mainGame.EndTurn();
+            
             break;
         }
 
@@ -98,11 +112,6 @@ int main()
 
 }
 
-std::string UserInputPrompt(std::string promptMessage)
-{
-    std::string userResponse;
-    std::cout << promptMessage << std::endl;
-    std::cin >> userResponse;
-    return userResponse;
-};
+
+
 

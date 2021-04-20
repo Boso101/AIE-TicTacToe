@@ -35,6 +35,7 @@
 		void ChangeGameState(GameState state);
 		void SetCurrentTurn(Player player);
 		void AIAction();
+		int UserInputPrompt(std::string prompt);
 		/// <summary>
 		/// Get the player config of whoevers turn it is
 		/// </summary>

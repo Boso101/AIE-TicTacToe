@@ -15,7 +15,11 @@
 		
 		
 		// Make this slot belong to nobody
-		Player owner =Player::EMPTY;
+		Player owner = Player::EMPTY;
+
+		int row = 0;
+		int column = 0;
+
 
 
 		char ToString();
@@ -25,4 +29,5 @@
 		/// </summary>
 		/// <returns> boolean on whether or not the player can take this spot</returns>
 		bool CanPlace();
+		void SetPosition(int row, int column);
 	};
