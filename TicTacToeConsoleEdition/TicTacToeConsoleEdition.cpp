@@ -93,5 +93,16 @@ int main()
         }
     }
 
+
+    
+
 }
+
+std::string UserInputPrompt(std::string promptMessage)
+{
+    std::string userResponse;
+    std::cout << promptMessage << std::endl;
+    std::cin >> userResponse;
+    return userResponse;
+};
 

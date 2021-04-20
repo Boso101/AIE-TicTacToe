@@ -5,7 +5,7 @@ GameBoard GameBoard::GetCurrentGameBoard()
 {
 	return *this;
 }
-BoardSlot GameBoard::GetSpace(int row, int column)
+BoardSlot& GameBoard::GetSpace(int row, int column)
 {
 	return theBoard[row][column];
 }

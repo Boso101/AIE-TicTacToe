@@ -20,7 +20,7 @@
 		const int ROWS = 3;
 		const int COLUMNS = 3;
 		
-		BoardSlot GetSpace(int row, int column);
+		BoardSlot& GetSpace(int row, int column);
 		GameBoard GetCurrentGameBoard();
 	};
 

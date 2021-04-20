@@ -91,7 +91,7 @@ void Game::PlaceSymbol( int row, int column)
 	}
 
 	// Get the passed BoardSlot
-	BoardSlot slot = board.GetSpace(row, column);
+	BoardSlot& slot = board.GetSpace(row, column);
 
 	// Can we place here
 	if (slot.CanPlace())
