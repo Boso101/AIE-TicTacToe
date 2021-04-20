@@ -61,7 +61,14 @@ int main()
         // Once we finish a game
         case GameState::FINISH:
         {
-            break;
+            std::string userInput = mainGame.UserInputPromptString("Play again? : ");
+            //TODO: Make lower case
+            if (userInput == "y" || userInput == "yes")
+            {
+                //Reset
+                mainGame.ChangeGameState(GameState::GAME_START);
+                mainGame.ResetGame();
+            }
         }
 
         // When it is player 1's turn
@@ -76,7 +83,7 @@ int main()
             mainGame.PrintLine("");
             mainGame.PrintAllFreeSpots();
             std::vector<BoardSlot> allFreeSlots = mainGame.GetAllFreeSlots();
-            int choice = mainGame.UserInputPrompt("Please enter a number correlating to the grid : ");
+            int choice = mainGame.UserInputPromptInt("Please enter a number correlating to the grid : ");
 
             // + 1 so that the user doesnt start at index 0
             if (choice < allFreeSlots.size())
@@ -92,7 +99,7 @@ int main()
             break;
 
          
-            break;
+            
         }
 
         // When it is player 2's turn

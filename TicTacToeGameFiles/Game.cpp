@@ -75,6 +75,7 @@ void Game::PrintGameState()
 
 }
 
+
 bool Game::IsThereWinner()
 {
 	// Check all possibles win cons.
@@ -84,10 +85,45 @@ bool Game::IsThereWinner()
 		ChangeGameState(GameState::FINISH);
 		//Print the game state again
 		PrintGameState();
+		PrintLine("Draw!");
 		return true;
 	}
 
-	//Check win cons
+	//Check win cons Across
+	//TODO: Probably rework this
+	// Have to do this because all slots have a default enum of "EMPTY"
+	if (board.GetSpace(0,0).owner != Player::EMPTY && board.GetSpace(0, 0).owner == board.GetSpace(0, 1).owner && board.GetSpace(0, 2).owner == board.GetSpace(0, 1).owner
+
+		|| board.GetSpace(1, 0).owner != Player::EMPTY && board.GetSpace(1, 0).owner == board.GetSpace(1, 1).owner && board.GetSpace(1, 2).owner == board.GetSpace(1, 0).owner
+		|| board.GetSpace(2, 0).owner != Player::EMPTY && board.GetSpace(2, 0).owner == board.GetSpace(2, 1).owner && board.GetSpace(2, 2).owner == board.GetSpace(2, 0).owner
+		)
+	{
+		
+		return true;
+
+	}
+
+	//Vertical Checks
+	if (board.GetSpace(0, 0).owner != Player::EMPTY && board.GetSpace(0, 0).owner == board.GetSpace(1, 0).owner && board.GetSpace(2, 0).owner == board.GetSpace(0, 0).owner
+
+		|| board.GetSpace(0, 1).owner != Player::EMPTY && board.GetSpace(0, 1).owner == board.GetSpace(1, 1).owner && board.GetSpace(2, 1).owner == board.GetSpace(0, 1).owner
+		|| board.GetSpace(0, 2).owner != Player::EMPTY && board.GetSpace(0, 2).owner == board.GetSpace(1, 2).owner && board.GetSpace(2, 2).owner == board.GetSpace(0, 2).owner
+
+		)
+	{
+		return true;
+
+	}
+
+	//Diagonal Checks
+	if (board.GetSpace(0, 0).owner != Player::EMPTY && board.GetSpace(0, 0).owner == board.GetSpace(1, 1).owner && board.GetSpace(2, 2).owner == board.GetSpace(0, 0).owner
+		|| board.GetSpace(2, 0).owner != Player::EMPTY &&  board.GetSpace(2, 0).owner == board.GetSpace(1, 1).owner && board.GetSpace(0, 2).owner == board.GetSpace(2, 0).owner
+		|| board.GetSpace(0, 2).owner != Player::EMPTY && board.GetSpace(0, 2).owner == board.GetSpace(1, 1).owner && board.GetSpace(2, 0).owner == board.GetSpace(0, 2).owner
+		|| board.GetSpace(2, 2).owner != Player::EMPTY && board.GetSpace(2, 2).owner == board.GetSpace(1, 1).owner && board.GetSpace(0, 0).owner == board.GetSpace(2, 2).owner
+		)
+	{
+		return true;
+	}
 
 	return false;
 }
@@ -110,6 +146,21 @@ PlayerConfig Game::GetCurrentPlayer()
 	return currentPlayer;
 }
 
+void Game::ResetGame()
+{
+	for (int i = 0; i < board.ROWS; i++)
+	{
+		for (int j = 0; j < board.COLUMNS; j++)
+		{
+			BoardSlot& slot = board.GetSpace(j, i);
+
+			slot.value = '-';
+			slot.owner = Player::EMPTY;
+
+		}
+	}
+}
+
 
 void Game::PlaceSymbol( int row, int column)
 {
@@ -127,13 +178,16 @@ void Game::PlaceSymbol( int row, int column)
 		slot.owner = currentPlayer.playerID;
 		slot.value = currentPlayer.playerSymbol;
 
+		PrintGameState();
+
 		//Check for Winner
 		if (IsThereWinner())
 		{
 			// Do stuff
 
 
-
+			PrintLine("Game Over!");
+			ChangeGameState(GameState::FINISH);
 			return;
 
 		}
@@ -241,9 +295,17 @@ void Game::PrintAllFreeSpots()
 	}
 }
 
-int Game::UserInputPrompt(std::string promptMessage)
+int Game::UserInputPromptInt(std::string promptMessage)
 {
 	int userResponse;
+	std::cout << promptMessage;
+	std::cin >> userResponse;
+	return userResponse;
+}
+
+std::string Game::UserInputPromptString(std::string promptMessage)
+{
+	std::string userResponse;
 	std::cout << promptMessage;
 	std::cin >> userResponse;
 	return userResponse;
