@@ -82,6 +82,8 @@ bool Game::IsThereWinner()
 	if (GetAllFreeSlots().size() == 0)
 	{
 		ChangeGameState(GameState::FINISH);
+		//Print the game state again
+		PrintGameState();
 		return true;
 	}
 
@@ -231,6 +233,7 @@ std::vector<BoardSlot> Game::GetAllFreeSlots()
 
 void Game::PrintAllFreeSpots()
 {
+	PrintLine("Free Spots :");
 	int size = GetAllFreeSlots().size();
 	for (int i = 0; i < size; i++)
 	{
