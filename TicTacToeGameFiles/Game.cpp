@@ -30,6 +30,10 @@ void Game::EndTurn()
 
 	
 	}
+
+	//TODO: Maybe dont have this here
+	// AI Begins thinking
+	AIAction();
 }
 void Game::PrintLine(std::string words)
 {
@@ -73,8 +77,7 @@ bool Game::IsThereWinner()
 	// Check all possibles win cons
 	return false;
 }
-
-void Game::PlaceSymbol( int row, int column)
+PlayerConfig Game::GetCurrentPlayer()
 {
 	//Get Current Player
 	PlayerConfig currentPlayer;
@@ -89,6 +92,15 @@ void Game::PlaceSymbol( int row, int column)
 		currentPlayer = player2;
 
 	}
+
+	return currentPlayer;
+}
+
+
+void Game::PlaceSymbol( int row, int column)
+{
+	
+	PlayerConfig currentPlayer = GetCurrentPlayer();
 
 	// Get the passed BoardSlot
 	BoardSlot& slot = board.GetSpace(row, column);
@@ -113,7 +125,7 @@ void Game::PlaceSymbol( int row, int column)
 		}
 
 		// Then end the players turn
-		this->EndTurn();
+		EndTurn();
 
 	}
 	else
@@ -154,6 +166,29 @@ void Game::SetStartingPlayer()
 void Game::SetCurrentTurn(Player p)
 {
 	currentTurn = p;
+}
+
+void Game::AIAction()
+{
+	PlayerConfig turnPlayer = GetCurrentPlayer();
+	
+	//Only run the AI if the game is still going and the playerconfig allows AI
+	if ( !IsThereWinner() && !turnPlayer.isAI)
+	{
+		return;
+	}
+	else
+	{
+		// AI Logic Here
+
+
+
+
+
+
+		
+	}
+
 }
 
 
