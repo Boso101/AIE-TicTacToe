@@ -34,6 +34,12 @@
 		bool IsThereWinner();
 		void ChangeGameState(GameState state);
 		void SetCurrentTurn(Player player);
+		void AIAction();
+		/// <summary>
+		/// Get the player config of whoevers turn it is
+		/// </summary>
+		/// <returns></returns>
+		PlayerConfig GetCurrentPlayer();
 
 		/// <summary>
 		/// Randomize the starting player
