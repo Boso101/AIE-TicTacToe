@@ -47,21 +47,21 @@ void Game::Print(char word)
 
 void Game::PrintGameState()
 {
-	// Empty string
 	
+	std::cout << "     |     |     " << std::endl;
+	std::cout << "  " << board.GetSpace(0,0).ToString() << "  |  " << board.GetSpace(0, 1).ToString() << "  |  " << board.GetSpace(0,2).ToString() << std::endl;
 
-	// nested for loop into board
-	Print("\n");
+	std::cout << "_____|_____|_____" << std::endl;
+	std::cout << "     |     |     " << std::endl;
 
-	for (int i = 0; i < board.ROWS; i++)
-	{
-		Print("\n");
-		for (int j = 0; j < board.COLUMNS; j++)
-		{
+	std::cout << "  " << board.GetSpace(1,0).ToString() << "  |  " << board.GetSpace(1,1).ToString() << "  |  " << board.GetSpace(1,2).ToString() << std::endl;
 
-          Print(board.GetSpace(j, i).ToString());
-		}
-	}
+	std::cout << "_____|_____|_____" << std::endl;
+	std::cout << "     |     |     " << std::endl;
+
+	std::cout << "  " << board.GetSpace(2,0).ToString() << "  |  " << board.GetSpace(2,1).ToString() << "  |  " << board.GetSpace(2,2).ToString()<< std::endl;
+
+	std::cout << "     |     |     " << std::endl << std::endl;
 
 	
 
