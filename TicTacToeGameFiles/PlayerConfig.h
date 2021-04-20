@@ -5,6 +5,7 @@ struct PlayerConfig
 {
 	Player playerID;
 	char playerSymbol;
+	bool isAI;
 
 
 
