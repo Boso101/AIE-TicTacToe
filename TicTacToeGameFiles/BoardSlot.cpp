@@ -20,3 +20,4 @@ void BoardSlot::SetPosition(int row, int column)
 	this->row = row;
 	this->column = column;
 }
+

@@ -21,7 +21,7 @@ int main()
     {
        Player::PLAYER_1,
        'O',
-       false
+       true
 
 
     };
@@ -82,7 +82,12 @@ int main()
             //User Input
             mainGame.PrintLine("");
             mainGame.PrintAllFreeSpots();
+            if (!mainGame.player1.isAI)
+            {
+
+          
             std::vector<BoardSlot> allFreeSlots = mainGame.GetAllFreeSlots();
+            mainGame.PrintLine("Each slot is printed as {ROW,COLUMN}");
             int choice = mainGame.UserInputPromptInt("Please enter a number correlating to the grid : ");
 
             // + 1 so that the user doesnt start at index 0
@@ -94,6 +99,7 @@ int main()
             else
             {
                 std::cout << "Please enter a number between 0 and 8";
+            }
             }
             
             break;

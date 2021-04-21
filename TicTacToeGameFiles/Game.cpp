@@ -90,7 +90,6 @@ bool Game::IsThereWinner()
 	}
 
 	//Check win cons Across
-	//TODO: Probably rework this
 	// Have to do this because all slots have a default enum of "EMPTY"
 	if (board.GetSpace(0,0).owner != Player::EMPTY && board.GetSpace(0, 0).owner == board.GetSpace(0, 1).owner && board.GetSpace(0, 2).owner == board.GetSpace(0, 1).owner
 
@@ -192,7 +191,7 @@ void Game::PlaceSymbol( int row, int column)
 
 		}
 		PrintLine("");
-		PrintLine("Successfully Placed ! Ending Turn...");
+		std::cout << "Player_" << (int)currentPlayer.playerID  << "sucessfully placed at :" << " {" << row << "," << column << "}" << std::endl;
 		// Then end the players turn
 		EndTurn();
 
@@ -287,11 +286,13 @@ std::vector<BoardSlot> Game::GetAllFreeSlots()
 
 void Game::PrintAllFreeSpots()
 {
+	std::vector<BoardSlot> slots = GetAllFreeSlots();
 	PrintLine("Free Spots :");
-	int size = GetAllFreeSlots().size();
+
+	int size = slots.size();
 	for (int i = 0; i < size; i++)
 	{
-		std::cout << "Slot " << i << std::endl;
+		std::cout << "Slot: " <<  i <<  " {" << slots[i].row << "," << slots[i].column << "}" << std::endl;
 	}
 }
 
