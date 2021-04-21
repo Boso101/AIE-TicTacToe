@@ -52,7 +52,7 @@ void Game::Print(char word)
 void Game::PrintGameState()
 {
 	//Clear the console
-	system("CLS");
+	//system("CLS");
 
 	std::cout << "\n" << std::endl;
 	std::cout << "     |     |     " << std::endl;
@@ -247,7 +247,7 @@ void Game::AIAction()
 	{
 		// AI Logic Here
 		// For now iteratively place in the next free spot
-		BoardSlot slot = freeSlots.at(0);
+		BoardSlot slot = freeSlots.at(rand() % freeSlots.size());
 		PlaceSymbol(slot.row, slot.column);
 		
 
