@@ -2,8 +2,12 @@
 
 struct  Player
 {
-	int highScore;
-	char playerName[16];
+	static const unsigned int NAME_LENGTH = 16;
+	//Constructor 
+	Player(const char* name, unsigned int highScore);
+
+	unsigned int highScore;
+	char playerName[NAME_LENGTH];
 
 
 };

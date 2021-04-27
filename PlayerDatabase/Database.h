@@ -7,7 +7,9 @@ struct Database
 
 
 
-	void WriteFile(const char* directory);
+	void WriteFile(const char* directory, Player toWrite);
 	void ReadFile(const char* file);
+
+
 
 };
