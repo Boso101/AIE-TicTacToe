@@ -9,3 +9,8 @@ Player::Player(const char* name, unsigned int highScore)
 	strcpy_s(this->playerName, NAME_LENGTH, name);
 
 }
+
+Player::Player()
+{
+
+}

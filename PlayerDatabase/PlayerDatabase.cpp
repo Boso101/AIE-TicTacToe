@@ -7,7 +7,10 @@
 int main()
 {
     bool running = true;
+    std::cout << "**************************" << std::endl;
     std::cout << "**** Player Database ****" << std::endl;
+    std::cout << "**************************" << std::endl;
+
 
     Database db;
     while (running)
