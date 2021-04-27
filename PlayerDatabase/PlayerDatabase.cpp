@@ -36,6 +36,16 @@ int main()
         break;
     }
 
+    case(DatabaseState::SAVE_PROFILES):
+    {
+        break;
+    }
+
+    case(DatabaseState::LOAD_PROFILES):
+    {
+        break;
+    }
+
     }
     }
     
