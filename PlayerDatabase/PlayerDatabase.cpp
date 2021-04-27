@@ -2,10 +2,14 @@
 //
 
 #include <iostream>
+#include "Database.h"
 
 int main()
 {
     std::cout << "**** Player Database ****" << std::endl;
+
+    Database db;
+    
 }
 
 

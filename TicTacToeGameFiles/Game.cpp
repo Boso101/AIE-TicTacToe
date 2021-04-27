@@ -268,7 +268,7 @@ std::vector<BoardSlot> Game::GetAllFreeSlots()
 	std::vector<BoardSlot> listOfSpots;
 	// Loop through and only add free spots
 	
-
+	listOfSpots.reserve(board.ROWS * board.COLUMNS);
 	for (int i = 0; i < board.ROWS; i++)
 	{
 		for (int j = 0; j < board.COLUMNS; j++)

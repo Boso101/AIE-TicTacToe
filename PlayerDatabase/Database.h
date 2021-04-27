@@ -2,7 +2,7 @@
 #include "Player.h"
 struct Database 
 {
-
+	Database();
 	Player loadedPlayers[];
 
 
