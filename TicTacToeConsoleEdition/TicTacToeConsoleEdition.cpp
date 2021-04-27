@@ -14,14 +14,78 @@
 /// set TicTacToeGame type to Static Library
 /// </summary>
 /// <returns></returns>
+/// 
+
+
+
+static void  PlayerInputPrompt(Game& mainGame)
+{
+    // Print game state before we make a move
+
+    mainGame.PrintGameState();
+
+    //User Input
+    mainGame.PrintLine("");
+    mainGame.PrintAllFreeSpots();
+    if (!mainGame.GetCurrentPlayer().isAI)
+    {
+
+
+        std::vector<BoardSlot> allFreeSlots = mainGame.GetAllFreeSlots();
+        mainGame.PrintLine("Each slot is printed as {ROW,COLUMN}");
+        int choice = mainGame.UserInputPromptInt("Please enter a number correlating to the grid : ");
+
+        //Dont let us continue
+        while (std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(256, '\n');
+            choice = mainGame.UserInputPromptInt("Please enter a number correlating to the grid : ");
+        }
+        // + 1 so that the user doesnt start at index 0
+        if (choice < allFreeSlots.size())
+        {
+            BoardSlot slot = allFreeSlots.at(choice);
+            mainGame.PlaceSymbol(slot.row, slot.column);
+        }
+        else
+        {
+            std::cout << "Please enter a number between 0 and 8";
+        }
+    }
+
+}
+
+static void HelpPrompt()
+{
+    std::cout << "======== COORDINATES ========" << std::endl;
+    std::cout << "{0,0} TOP LEFT " << std::endl;
+    std::cout << "{0,1} TOP CENTER " << std::endl;
+    std::cout << "{0,2} TOP RIGHT " << std::endl;
+
+    std::cout << "{1,0} MIDDLE LEFT " << std::endl;
+    std::cout << "{1,1} MIDDLE CENTER " << std::endl;
+    std::cout << "{1,2} MIDDLE RIGHT " << std::endl;
+
+    std::cout << "{2,0} BOTTOM LEFT " << std::endl;
+    std::cout << "{2,1} BOTTOM CENTER " << std::endl;
+    std::cout << "{2,2} BOTTOM RIGHT " << std::endl;
+
+
+
+
+
+
+}
+
 int main()
 {
     //Setup players
    PlayerConfig p1
     {
        Player::PLAYER_1,
-       'O',
-       true
+       'o',
+       false
 
 
     };
@@ -29,8 +93,8 @@ int main()
     PlayerConfig p2
     {
        Player::PLAYER_2,
-       'X',
-       true
+       'x',
+       false
 
 
     };
@@ -74,34 +138,10 @@ int main()
         // When it is player 1's turn
         case GameState::PLAYER_1_INPUT:
         {
+            HelpPrompt();
+
             mainGame.AIAction();
-            // Print game state before we make a move
-
-            mainGame.PrintGameState();
-
-            //User Input
-            mainGame.PrintLine("");
-            mainGame.PrintAllFreeSpots();
-            if (!mainGame.player1.isAI)
-            {
-
-          
-            std::vector<BoardSlot> allFreeSlots = mainGame.GetAllFreeSlots();
-            mainGame.PrintLine("Each slot is printed as {ROW,COLUMN}");
-            int choice = mainGame.UserInputPromptInt("Please enter a number correlating to the grid : ");
-
-            // + 1 so that the user doesnt start at index 0
-            if (choice < allFreeSlots.size())
-            {
-                BoardSlot slot = allFreeSlots.at(choice);
-                mainGame.PlaceSymbol(slot.row, slot.column);
-            }
-            else
-            {
-                std::cout << "Please enter a number between 0 and 8";
-            }
-            }
-            
+            PlayerInputPrompt(mainGame);
             break;
 
          
@@ -111,9 +151,11 @@ int main()
         // When it is player 2's turn
         case GameState::PLAYER_2_INPUT:
         {
+            HelpPrompt();
 
             mainGame.AIAction();
-            mainGame.PrintGameState();
+            PlayerInputPrompt(mainGame);
+
 
             
             break;
@@ -124,7 +166,7 @@ int main()
 
 
     
-
+   
 }
 
 

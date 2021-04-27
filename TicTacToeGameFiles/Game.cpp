@@ -70,6 +70,8 @@ void Game::PrintGameState()
 
 	std::cout << "     |     |     " << std::endl << std::endl;
 
+
+
 	
 
 
@@ -292,7 +294,7 @@ void Game::PrintAllFreeSpots()
 	int size = slots.size();
 	for (int i = 0; i < size; i++)
 	{
-		std::cout << "Slot: " <<  i <<  " {" << slots[i].row << "," << slots[i].column << "}" << std::endl;
+		std::cout << "Slot: " << i <<  " {" << slots[i].row << "," << slots[i].column << "}" << std::endl;
 	}
 }
 
