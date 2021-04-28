@@ -30,6 +30,17 @@ void Database::RemovePlayer(Player p)
 
 Database::Database(unsigned int maxPlayers)
 {
+	//Clamping
+	if (maxPlayers <= 0)
+	{
+		maxPlayers = 4;
+	}
+
+	if (maxPlayers > 16)
+	{
+		maxPlayers = 16;
+	}
+	
 	loadedPlayers = new Player[maxPlayers];
 }
 
