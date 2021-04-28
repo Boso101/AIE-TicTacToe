@@ -28,7 +28,12 @@ void Database::RemovePlayer(Player p)
 
 }
 
-Database::Database()
+Database::Database(unsigned int maxPlayers)
 {
-	
+	loadedPlayers = new Player[maxPlayers];
+}
+
+Database::~Database()
+{
+	delete[] loadedPlayers;
 }

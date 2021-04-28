@@ -7,7 +7,8 @@ struct Database
 
 	
 
-
+	Database(unsigned int maxPlayers);
+	~Database();
 
 	void WriteFile(const char* directory, Player toWrite);
 	void ReadFile(const char* file);
@@ -17,6 +18,6 @@ struct Database
 	void RemovePlayer(Player p);
 
 	const static int MAX_PLAYERS = 64;
-	Player loadedPlayers[MAX_PLAYERS];
+	Player* loadedPlayers;
 	DatabaseState state;
 };
