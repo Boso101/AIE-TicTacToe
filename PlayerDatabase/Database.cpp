@@ -44,6 +44,11 @@ Database::Database(unsigned int maxPlayers)
 	loadedPlayers = new Player[maxPlayers];
 }
 
+Database::Database()
+{
+
+}
+
 Database::~Database()
 {
 	delete[] loadedPlayers;

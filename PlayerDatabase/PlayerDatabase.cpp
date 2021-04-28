@@ -12,7 +12,7 @@ int main()
     std::cout << "**************************" << std::endl;
 
 
-    Database db;
+    Database db(4);
     while (running)
     {
 
