@@ -1,6 +1,6 @@
 #pragma once
 
-enum DatabaseState
+enum class DatabaseState
 {
 	CREATE_PROFILE,
 	SEARCH_PROFILE,

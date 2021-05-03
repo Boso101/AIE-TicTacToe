@@ -61,8 +61,14 @@ void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
 	if (playerInUse < maxPlayers)
 	{
 		loadedPlayers[playerInUse] = Player(nameP.c_str(), highScore);
-		//Increase player in use 
+		//Increase player in use after adding 
 		playerInUse++;
+	}
+	else
+	{
+		//Cannot add anymore
+		//throw error
+		std::exception("Player Database Full...");
 	}
 }
 
