@@ -52,7 +52,7 @@ int main()
         else if (choice == "view")
         {
             std::cout << "\n" << std::endl;
-            for (int i = 0; i < db.playerInUse; i++)
+            for (int i = 0; i < db.loadedPlayerCount; i++)
             {
                 db.loadedPlayers[i].PrintInformation();
             }
@@ -61,13 +61,43 @@ int main()
         }
 
         // For modifying a profile
-        else if (choice == "TODO")
+        else if (choice == "modify")
         {
+
+            unsigned int element;
+
+            std::cout << "Please enter player position to modify." << std::endl;
+
+            std::cin >> element;
+
+            if (element <= db.loadedPlayerCount)
+            {
+                std::string newName;
+                Player& currentP = db.loadedPlayers[element];
+                //Valid element
+                std::cout <<"Now modifying " << currentP.playerName << std::endl;
+
+                std::cout << "New Name : ";
+                std::cin >> newName;
+             
+
+                //Change if something new
+                if (newName != "")
+                {
+                   strcpy_s(currentP.playerName, Player::NAME_LENGTH, newName.c_str());
+                   std::cout << "Name changed sucessfully!" << std::endl;
+                }
+            }
+            else
+            {
+                // Not valid
+                std::cout << "Not a valid element." << std::endl;
+            }
 
         }
 
 
-
+        db.state = DatabaseState::USER_INPUT;
             break;
     }
 

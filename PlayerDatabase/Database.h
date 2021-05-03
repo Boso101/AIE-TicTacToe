@@ -45,7 +45,11 @@ struct Database
 	const static unsigned int MAX_PLAYERS = 16;
 	
 	int maxPlayers;
-	int playerInUse = 0;
+
+	/// <summary>
+	/// Keeps track of the amount of loaded players in the loadedPlayer array
+	/// </summary>
+	int loadedPlayerCount = 0;
 	Player* loadedPlayers;
 	DatabaseState state;
 

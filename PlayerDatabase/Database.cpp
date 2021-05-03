@@ -60,9 +60,9 @@ void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
 {
 	if (!IsFull())
 	{
-		loadedPlayers[playerInUse] = Player(nameP.c_str(), highScore);
+		loadedPlayers[loadedPlayerCount] = Player(nameP.c_str(), highScore);
 		//Increase player in use after adding 
-		playerInUse++;
+		loadedPlayerCount++;
 	}
 	else
 	{
@@ -76,9 +76,9 @@ void Database::AddPlayer(Player& player)
 {
 	if (!IsFull())
 	{
-		loadedPlayers[playerInUse] = player;
+		loadedPlayers[loadedPlayerCount] = player;
 		//Increase player in use after adding 
-		playerInUse++;
+		loadedPlayerCount++;
 	}
 	else
 	{
@@ -90,7 +90,7 @@ void Database::AddPlayer(Player& player)
 
 bool  Database::IsFull()
 {
-	return playerInUse == maxPlayers;
+	return loadedPlayerCount == maxPlayers;
 }
 
 Database::~Database()
