@@ -13,8 +13,8 @@ Player::Player(const char* name, unsigned int highScore)
 void Player::PrintInformation()
 {
 
-	std::cout << "Player Name: " << this->playerName << std::endl;
-	std::cout << "Highscore: " << this->highScore << std::endl;
+	std::cout << this->playerName;
+	std::cout << "," << this->highScore << std::endl;
 
 
 }
