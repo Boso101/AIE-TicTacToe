@@ -27,6 +27,11 @@ int main()
 
     case(DatabaseState::CREATE_PROFILE):
     {
+        // Prompt user to input name
+
+        // Then prompt user to input highscore
+
+        // Then add them to the database
         break;
     }
 
@@ -47,7 +52,7 @@ int main()
 
     case(DatabaseState::LOAD_PROFILES):
     {
-        db.ReadFile();
+        db.ReadFile("PlayerList.bin");
         break;
     }
 
