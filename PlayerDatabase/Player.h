@@ -11,4 +11,8 @@ struct  Player
 	char playerName[NAME_LENGTH];
 
 
+
+	void PrintInformation();
+
+
 };

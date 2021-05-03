@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <xpolymorphic_allocator.h>
+#include <iostream>
 
 Player::Player(const char* name, unsigned int highScore)
 {
@@ -9,7 +10,14 @@ Player::Player(const char* name, unsigned int highScore)
 	strcpy_s(this->playerName, NAME_LENGTH, name);
 
 }
+void Player::PrintInformation()
+{
 
+	std::cout << "Player Name: " << this->playerName << std::endl;
+	std::cout << "Highscore: " << this->highScore << std::endl;
+
+
+}
 Player::Player()
 {
 
