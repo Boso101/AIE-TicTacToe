@@ -70,13 +70,21 @@ int main()
 
             std::cin >> element;
 
+            //TODO: Functions that handle this nicer
             if (element <= db.loadedPlayerCount)
             {
                 std::string newName;
                 Player& currentP = db.loadedPlayers[element];
                 //Valid element
                 std::cout <<"Now modifying " << currentP.playerName << std::endl;
-
+                std::cout << "Do you wish to modify the highscore or name?\n\nPlease type either name for name change or highscore for score change." << std::endl;
+                std::string choice;
+                std::cin >> choice;
+                
+                if (choice == "name")
+                {
+                    // if we are here then we decided to modify the name
+                
                 std::cout << "New Name : ";
                 std::cin >> newName;
              
@@ -86,6 +94,26 @@ int main()
                 {
                    strcpy_s(currentP.playerName, Player::NAME_LENGTH, newName.c_str());
                    std::cout << "Name changed sucessfully!" << std::endl;
+                }
+                }
+                else if(choice == "score")
+                {
+                    unsigned int newScore;
+                    // here because we decided to change the high score
+                    
+                    //TODO: Make sure its actually a number..
+
+                    std::cout << "New Score : ";
+                    std::cin >> newScore;
+                    
+                    if (newScore < 0)
+                    {
+                        newScore = 0;
+                    }
+
+                    currentP.highScore = newScore;
+                    std::cout << "Score changed sucessfully!" << std::endl;
+
                 }
             }
             else
