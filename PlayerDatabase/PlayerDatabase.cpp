@@ -40,6 +40,10 @@ int main()
 
         // Then add them to the database
         db.AddPlayer(playerName, highScore);
+
+
+
+        db.state = DatabaseState::USER_INPUT;
         break;
     }
 
