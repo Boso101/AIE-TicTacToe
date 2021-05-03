@@ -35,7 +35,7 @@ struct Database
 	/// Add player by passing an instance of the player class.
 	/// </summary>
 	/// <param name="player"></param>
-	void AddPlayer(Player player);
+	void AddPlayer(Player& player);
 	void BubbleSortPlayers(Player* playerList);
 	bool IsFull();
 

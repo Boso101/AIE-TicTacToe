@@ -71,7 +71,7 @@ void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
 	}
 }
 
-void Database::AddPlayer(Player player)
+void Database::AddPlayer(Player& player)
 {
 	if (!IsFull())
 	{
