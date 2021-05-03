@@ -13,7 +13,7 @@ void Database::ReadFile(const char* file)
 
 }
 
-void Database::BubbleSortPlayers(Player playerList[])
+void Database::BubbleSortPlayers(Player* playerList)
 
 	{
 		int i, j;
@@ -21,15 +21,12 @@ void Database::BubbleSortPlayers(Player playerList[])
 
 			// Last i elements are already in place 
 			for (j = 0; j < this->maxPlayers - 1; j++)
-				if (loadedPlayers[j].highScore > loadedPlayers[j + 1].highScore)
+				if (playerList[j].highScore > loadedPlayers[j + 1].highScore)
 					Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
 	}
 
 
-void Database::AddPlayer(Player p)
-{
 
-}
 
 void Database::Swap(Player* p1, Player* p2)
 {
@@ -39,10 +36,7 @@ void Database::Swap(Player* p1, Player* p2)
 }
 
 
-void Database::RemovePlayer(Player p)
-{
 
-}
 
 Database::Database(unsigned int maxPlayers)
 {

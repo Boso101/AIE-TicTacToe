@@ -12,10 +12,9 @@ struct Database
 
 	void WriteFile(const char* directory, Player toWrite);
 	void ReadFile(const char* file);
-	void BubbleSortPlayers(Player playerList[]);
+	void BubbleSortPlayers(Player* playerList);
 
-	void AddPlayer(Player p);
-	void RemovePlayer(Player p);
+
 
 	// Limit of max players
 	const static int MAX_PLAYERS = 64;
