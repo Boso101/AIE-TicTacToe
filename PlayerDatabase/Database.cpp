@@ -71,6 +71,22 @@ void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
 	}
 }
 
+void Database::AddPlayer(Player player)
+{
+	if (!IsFull())
+	{
+		loadedPlayers[playerInUse] = player;
+		//Increase player in use after adding 
+		playerInUse++;
+	}
+	else
+	{
+		//Cannot add anymore
+		//throw error
+		std::exception("Player Database Full...");
+	}
+}
+
 bool  Database::IsFull()
 {
 	return playerInUse == maxPlayers;
