@@ -57,7 +57,7 @@ Database::Database(unsigned int maximumPlayers)
 
 void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
 {
-	if (playerInUse < maxPlayers)
+	if (!IsFull())
 	{
 		loadedPlayers[playerInUse] = Player(nameP.c_str(), highScore);
 		//Increase player in use after adding 
