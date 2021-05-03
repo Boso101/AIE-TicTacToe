@@ -27,11 +27,19 @@ int main()
 
     case(DatabaseState::CREATE_PROFILE):
     {
+        std::string playerName;
+        unsigned int highScore = 0;
+
         // Prompt user to input name
+        std::cout << "Player Name: ";
+        std::cin >> playerName;
 
         // Then prompt user to input highscore
+        std::cout << "Player Score: ";
+        std::cin >> highScore;
 
         // Then add them to the database
+        db.AddPlayer(playerName, highScore);
         break;
     }
 
