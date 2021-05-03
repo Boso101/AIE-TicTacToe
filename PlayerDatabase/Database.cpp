@@ -71,7 +71,10 @@ void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
 	}
 }
 
-
+bool  Database::IsFull()
+{
+	return playerInUse == maxPlayers;
+}
 
 Database::~Database()
 {

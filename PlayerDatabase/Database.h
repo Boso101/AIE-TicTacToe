@@ -15,6 +15,7 @@ struct Database
 	void ReadFile(const char* file);
 	void AddPlayer(const std::string& nameP, unsigned int score);
 	void BubbleSortPlayers(Player* playerList);
+	bool IsFull();
 
 
 
