@@ -1,6 +1,6 @@
 #include "Database.h"
 
-void Database::WriteFile(const char* directory, Player toWrite)
+void Database::WriteFile(const char* directory)
 {
 	// Check if file exists
 
@@ -52,6 +52,18 @@ Database::Database(unsigned int maxPlayers)
 	}
 	
 	loadedPlayers = new Player[this->maxPlayers];
+
+	state = DatabaseState::LOAD_PROFILES;
+}
+
+void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
+{
+	if (playerInUse < maxPlayers)
+	{
+		loadedPlayers[playerInUse] = Player(nameP.c_str(), highScore);
+		//Increase player in use 
+		playerInUse++;
+	}
 }
 
 Database::Database()

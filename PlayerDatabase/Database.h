@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "DatabaseState.h"
+#include <string>
 struct Database 
 {
 	Database();
@@ -10,8 +11,9 @@ struct Database
 	Database(unsigned int maxPlayers);
 	~Database();
 
-	void WriteFile(const char* directory, Player toWrite);
+	void WriteFile(const char* directory);
 	void ReadFile(const char* file);
+	void AddPlayer(const std::string& nameP, unsigned int score);
 	void BubbleSortPlayers(Player* playerList);
 
 
@@ -20,6 +22,7 @@ struct Database
 	const static int MAX_PLAYERS = 64;
 	
 	int maxPlayers = 0;
+	int playerInUse = 0;
 	Player* loadedPlayers;
 	DatabaseState state;
 

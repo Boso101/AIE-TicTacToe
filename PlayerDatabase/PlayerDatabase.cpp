@@ -47,6 +47,7 @@ int main()
 
     case(DatabaseState::LOAD_PROFILES):
     {
+        db.ReadFile();
         break;
     }
 
