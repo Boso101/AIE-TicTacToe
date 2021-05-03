@@ -19,7 +19,7 @@ struct Database
 
 
 	// Limit of max players
-	const static int MAX_PLAYERS = 64;
+	const static unsigned int MAX_PLAYERS = 16;
 	
 	int maxPlayers;
 	int playerInUse = 0;

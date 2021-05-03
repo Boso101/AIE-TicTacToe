@@ -51,10 +51,13 @@ int main()
 
         else if (choice == "view")
         {
+            std::cout << "\n" << std::endl;
             for (int i = 0; i < db.playerInUse; i++)
             {
                 db.loadedPlayers[i].PrintInformation();
             }
+            std::cout << "\n" << std::endl;
+
         }
 
         // For modifying a profile

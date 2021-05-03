@@ -48,7 +48,7 @@ void Database::Swap(Player* p1, Player* p2)
 
 Database::Database(unsigned int maximumPlayers)
 {
-	this->maxPlayers = std::min(std::max(maximumPlayers, 0u), 16u);
+	this->maxPlayers = std::min(std::max(maximumPlayers, 0u), MAX_PLAYERS);
 	
 	loadedPlayers = new Player[this->maxPlayers];
 
