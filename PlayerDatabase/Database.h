@@ -4,7 +4,7 @@
 #include <string>
 struct Database 
 {
-	Database();
+
 
 	
 
@@ -21,7 +21,7 @@ struct Database
 	// Limit of max players
 	const static int MAX_PLAYERS = 64;
 	
-	int maxPlayers = 0;
+	int maxPlayers;
 	int playerInUse = 0;
 	Player* loadedPlayers;
 	DatabaseState state;

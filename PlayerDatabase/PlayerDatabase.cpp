@@ -22,6 +22,49 @@ int main()
     {
     case(DatabaseState::USER_INPUT):
     {
+        std::string choice;
+        std::cout << "Please decide on an action with the following commands.\n" << std::endl;
+        std::cout << "== Commands == " << std::endl;
+        std::cout << "add - Create a new Player Profile " << std::endl;
+        std::cout << "modify <playername> - Modify an existing player " << std::endl;
+        std::cout << "save - Save all Players to file. " << std::endl;
+        std::cout << "view - View all players" << std::endl;
+
+        std::cin >> choice;
+
+        //if statements dependent on user choice
+
+        // Add a profile
+        if (choice == "add")
+        {
+
+        }
+
+        // Save all the profiles
+        else if (choice == "save")
+        {
+
+        }
+
+
+        // view all profiles in alphabetical order
+
+        else if (choice == "view")
+        {
+            for (int i = 0; i < db.playerInUse; i++)
+            {
+                db.loadedPlayers[i].PrintInformation();
+            }
+        }
+
+        // For modifying a profile
+        else if (choice == "TODO")
+        {
+
+        }
+
+
+
             break;
     }
 
@@ -54,6 +97,7 @@ int main()
 
     case(DatabaseState::SEARCH_PROFILE):
     {
+        
         break;
     }
 
@@ -65,6 +109,7 @@ int main()
     case(DatabaseState::LOAD_PROFILES):
     {
         db.ReadFile("PlayerList.bin");
+        db.state = DatabaseState::USER_INPUT;
         break;
     }
 

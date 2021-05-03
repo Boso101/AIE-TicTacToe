@@ -1,5 +1,7 @@
 #include "Database.h"
 
+#include <algorithm>
+
 void Database::WriteFile(const char* directory)
 {
 	// Check if file exists
@@ -10,7 +12,13 @@ void Database::WriteFile(const char* directory)
 
 void Database::ReadFile(const char* file)
 {
+	AddPlayer("John", 5);
+	AddPlayer("Joe", 69);
 
+
+
+	//Give it a sort
+	BubbleSortPlayers(loadedPlayers);
 }
 
 void Database::BubbleSortPlayers(Player* playerList)
@@ -38,18 +46,9 @@ void Database::Swap(Player* p1, Player* p2)
 
 
 
-Database::Database(unsigned int maxPlayers)
+Database::Database(unsigned int maximumPlayers)
 {
-	//Clamping
-	if (maxPlayers <= 0)
-	{
-		this->maxPlayers = 4;
-	}
-
-	if (maxPlayers > 16)
-	{
-		this->maxPlayers = 16;
-	}
+	this->maxPlayers = std::min(std::max(maximumPlayers, 0u), 16u);
 	
 	loadedPlayers = new Player[this->maxPlayers];
 
@@ -72,12 +71,10 @@ void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
 	}
 }
 
-Database::Database()
-{
 
-}
 
 Database::~Database()
 {
 	delete[] loadedPlayers;
+	delete this;
 }
