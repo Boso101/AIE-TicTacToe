@@ -17,7 +17,15 @@ struct Database
 	void AddPlayer(Player p);
 	void RemovePlayer(Player p);
 
+	// Limit of max players
 	const static int MAX_PLAYERS = 64;
+	
+	int maxPlayers = 0;
 	Player* loadedPlayers;
 	DatabaseState state;
+
+
+private:
+	//Helper Method
+	void Swap(Player* p, Player* p2);
 };

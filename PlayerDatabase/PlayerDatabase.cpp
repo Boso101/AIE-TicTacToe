@@ -13,6 +13,7 @@ int main()
 
 
     Database db(4);
+
     while (running)
     {
 
@@ -20,9 +21,9 @@ int main()
     switch (db.state)
     {
     case(DatabaseState::USER_INPUT):
-        {
+    {
             break;
-        }
+    }
 
     case(DatabaseState::CREATE_PROFILE):
     {
