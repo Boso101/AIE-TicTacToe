@@ -1,6 +1,7 @@
 #include "Database.h"
 
 #include <algorithm>
+#include <iostream>
 
 void Database::WriteFile(const char* directory)
 {
@@ -43,6 +44,65 @@ void Database::Swap(Player* p1, Player* p2)
 	*p1 = *p2;
 	*p2 = temp;
 }
+
+void Database::ModifyPlayerPrompt(Player& player)
+{
+	
+		//Valid element
+		std::cout << "Now modifying " << player.playerName << std::endl;
+		std::cout << "Do you wish to modify the highscore or name?\n\nPlease type either name for name change or score for highscore change." << std::endl;
+		std::string choice;
+		std::cin >> choice;
+
+		if (choice == "name")
+		{
+			// if we are here then we decided to modify the name
+			Database::ModifyPlayerNamePrompt(player);
+			
+		}
+		else if (choice == "score")
+		{
+			Database::ModifyHighScorePrompt(player);
+
+
+		}
+	}
+
+void Database::ModifyPlayerNamePrompt(Player& player)
+{
+	std::string newName;
+
+	std::cout << "New Name : ";
+	std::cin >> newName;
+
+
+	//Change if something new
+	if (newName != "")
+	{
+		strcpy_s(player.playerName, Player::NAME_LENGTH, newName.c_str());
+		std::cout << "Name changed sucessfully!" << std::endl;
+	}
+}
+
+void Database::ModifyHighScorePrompt(Player& player)
+{
+	unsigned int newScore;
+	// here because we decided to change the high score
+
+	//TODO: Make sure its actually a number..
+
+	std::cout << "New Score : ";
+	std::cin >> newScore;
+
+	if (newScore < 0)
+	{
+		newScore = 0;
+	}
+
+	player.highScore = newScore;
+	std::cout << "Score changed sucessfully!" << std::endl;
+}
+
 
 
 

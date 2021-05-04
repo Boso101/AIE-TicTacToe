@@ -26,7 +26,7 @@ int main()
         std::cout << "Please decide on an action with the following commands.\n" << std::endl;
         std::cout << "== Commands == " << std::endl;
         std::cout << "add - Create a new Player Profile " << std::endl;
-        std::cout << "modify <playername> - Modify an existing player " << std::endl;
+        std::cout << "modify - Modify an existing player " << std::endl;
         std::cout << "save - Save all Players to file. " << std::endl;
         std::cout << "view - View all players" << std::endl;
 
@@ -37,6 +37,7 @@ int main()
         // Add a profile
         if (choice == "add")
         {
+            db.state = DatabaseState::CREATE_PROFILE;
 
         }
 
@@ -64,68 +65,12 @@ int main()
         else if (choice == "modify")
         {
 
-            unsigned int element;
+            db.state = DatabaseState::MODIFY_PROFILE;
 
-            std::cout << "Please enter player position to modify." << std::endl;
-
-            std::cin >> element;
-
-            //TODO: Functions that handle this nicer
-            if (element <= db.loadedPlayerCount)
-            {
-                std::string newName;
-                Player& currentP = db.loadedPlayers[element];
-                //Valid element
-                std::cout <<"Now modifying " << currentP.playerName << std::endl;
-                std::cout << "Do you wish to modify the highscore or name?\n\nPlease type either name for name change or highscore for score change." << std::endl;
-                std::string choice;
-                std::cin >> choice;
-                
-                if (choice == "name")
-                {
-                    // if we are here then we decided to modify the name
-                
-                std::cout << "New Name : ";
-                std::cin >> newName;
-             
-
-                //Change if something new
-                if (newName != "")
-                {
-                   strcpy_s(currentP.playerName, Player::NAME_LENGTH, newName.c_str());
-                   std::cout << "Name changed sucessfully!" << std::endl;
-                }
-                }
-                else if(choice == "score")
-                {
-                    unsigned int newScore;
-                    // here because we decided to change the high score
-                    
-                    //TODO: Make sure its actually a number..
-
-                    std::cout << "New Score : ";
-                    std::cin >> newScore;
-                    
-                    if (newScore < 0)
-                    {
-                        newScore = 0;
-                    }
-
-                    currentP.highScore = newScore;
-                    std::cout << "Score changed sucessfully!" << std::endl;
-
-                }
-            }
-            else
-            {
-                // Not valid
-                std::cout << "Not a valid element." << std::endl;
-            }
 
         }
 
 
-        db.state = DatabaseState::USER_INPUT;
             break;
     }
 
@@ -153,6 +98,29 @@ int main()
 
     case(DatabaseState::MODIFY_PROFILE):
     {
+        unsigned int element;
+
+        std::cout << "Please enter player position to modify." << std::endl;
+
+        std::cin >> element;
+        Player& currentP = db.loadedPlayers[element];
+
+
+        if (element <= db.loadedPlayerCount)
+        {
+            //Begin modifiying
+
+            db.ModifyPlayerPrompt(currentP);
+
+        }
+        else
+        {
+            // Not valid
+            std::cout << "Not a valid element." << std::endl;
+        }
+
+        db.state = DatabaseState::USER_INPUT;
+
         break;
     }
 

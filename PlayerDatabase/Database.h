@@ -39,6 +39,11 @@ struct Database
 	void BubbleSortPlayers(Player* playerList);
 	bool IsFull();
 
+	void ModifyPlayerPrompt(Player& player);
+
+	void ModifyHighScorePrompt(Player& player);
+	void ModifyPlayerNamePrompt(Player& player);
+
 
 
 	// Limit of max players
