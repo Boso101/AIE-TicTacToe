@@ -147,6 +147,7 @@ int main()
         db.WriteFile("PlayerList.bin");
 
         std::cout << "Saved Sucessfully..." << std::endl;
+        db.state = DatabaseState::USER_INPUT;
         break;
     }
 

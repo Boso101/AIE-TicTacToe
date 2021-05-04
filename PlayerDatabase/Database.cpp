@@ -136,6 +136,8 @@ Database::Database(unsigned int maximumPlayers)
 	
 	loadedPlayers = new Player[this->maxPlayers];
 
+	ReadFile("PlayerList.bin");
+
 	state = DatabaseState::LOAD_PROFILES;
 }
 
