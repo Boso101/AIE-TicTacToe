@@ -1,21 +1,44 @@
 #include "Database.h"
-
 #include <algorithm>
-#include <iostream>
+#include <iostream>]
+#include <fstream>
 
 void Database::WriteFile(const char* directory)
 {
 	// Check if file exists
+	std::fstream file;
+	file.open(directory, std::ios::out | std::ios::binary);
 
+	if (file.is_open())
+	{
 
+	
+	// Write out the file
+	file.write((char*)loadedPlayers, sizeof(Player) * loadedPlayerCount);
+	}
+	else
+	{
+		
+	}
 
+	file.close();
 }
 
 void Database::ReadFile(const char* file)
 {
-	AddPlayer("John", 5);
-	AddPlayer("Joe", 69);
+	std::fstream fileS;
+	fileS.open(file, std::ios::in | std::ios::binary);
+	
+	if (!fileS.is_open())
+	{
+		WriteFile(file);
+		return;
+	}
 
+	fileS.read(reinterpret_cast<char*>(loadedPlayers), fileS.tellg());
+	loadedPlayerCount = fileS.tellg();
+	fileS.close();
+	
 
 
 	//Give it a sort

@@ -45,7 +45,7 @@ int main()
         // Save all the profiles
         else if (choice == "save")
         {
-
+            db.state = DatabaseState::SAVE_PROFILES;
         }
 
 
@@ -144,6 +144,9 @@ int main()
 
     case(DatabaseState::SAVE_PROFILES):
     {
+        db.WriteFile("PlayerList.bin");
+
+        std::cout << "Saved Sucessfully..." << std::endl;
         break;
     }
 
