@@ -29,6 +29,7 @@ int main()
         std::cout << "modify - Modify an existing player " << std::endl;
         std::cout << "save - Save all Players to file. " << std::endl;
         std::cout << "view - View all players" << std::endl;
+        std::cout << "binary-s - Binary search for a player with a specified score" << std::endl;
 
         std::cin >> choice;
 
@@ -68,6 +69,11 @@ int main()
             db.state = DatabaseState::MODIFY_PROFILE;
 
 
+        }
+
+        else if (choice == "binary-s")
+        {
+            db.state = DatabaseState::SEARCH_PROFILE;
         }
 
 
@@ -126,7 +132,13 @@ int main()
 
     case(DatabaseState::SEARCH_PROFILE):
     {
-        
+        unsigned int scr;
+        std::cout << "What highscore value are you searching for?\n" << std::endl;
+        std::cin >> scr;
+        db.BinarySearchPlayer(scr);
+
+        db.state = DatabaseState::USER_INPUT;
+
         break;
     }
 

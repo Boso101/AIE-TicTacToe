@@ -148,6 +148,57 @@ void Database::AddPlayer(Player& player)
 	}
 }
 
+
+void Database::BinarySearchPlayer(unsigned int highScore)
+{
+	// Sort first
+	BubbleSortPlayers(loadedPlayers);
+	
+
+	int element = BinarySearch(loadedPlayers, 0, loadedPlayerCount - 1, highScore);
+	if (element != -1)
+	{
+		std::cout << "Found an entry" << std::endl;
+		loadedPlayers[element].PrintInformation();
+	}
+	else
+	{
+		std::cout << "Could not find anyone with a highscore value of "<< highScore << std::endl;
+
+	}
+
+}
+
+int Database::BinarySearch(Player* playerList, int left, int right, unsigned int targetScore)
+{
+	// A recursive binary search function. It returns
+	// a reference  to the first player it finds which holds 
+	// the specified highScore
+	
+		if (right >= left) {
+			int mid = left + (right - left) / 2;
+
+			// If the element is present at the middle
+			// itself
+			if (playerList[mid].highScore == targetScore)
+				return mid;
+
+			// If element is smaller than mid, then
+			// it can only be present in left subarray
+			if (playerList[mid].highScore > targetScore)
+				return BinarySearch(playerList, left, mid - 1, targetScore);
+
+			// Else the element can only be present
+			// in right subarray
+			return BinarySearch(playerList, mid + 1, right, targetScore);
+		}
+
+		// We reach here when element is not
+		// present in array
+		return -1;
+
+}
+
 bool  Database::IsFull()
 {
 	return loadedPlayerCount == maxPlayers;
@@ -155,6 +206,7 @@ bool  Database::IsFull()
 
 Database::~Database()
 {
+	WriteFile("PlayerList.bin");
 	delete[] loadedPlayers;
 	delete this;
 }

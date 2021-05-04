@@ -39,10 +39,30 @@ struct Database
 	void BubbleSortPlayers(Player* playerList);
 	bool IsFull();
 
+	/// <summary>
+	/// Lets the user modify both the Name and Highscore of a Player reference.
+	/// </summary>
+	/// <param name="player"></param>
 	void ModifyPlayerPrompt(Player& player);
 
 	void ModifyHighScorePrompt(Player& player);
 	void ModifyPlayerNamePrompt(Player& player);
+
+
+	/// <summary>
+	/// Tries to find a player via binary search with the passed high score.
+	/// </summary>
+	/// <param name="highScore"></param>
+
+	void BinarySearchPlayer(unsigned int highScore);
+
+
+	/// <summary>
+	/// The actual binary search recursive algorithm
+	/// </summary>
+	/// <param name="playerArray"></param>
+	/// <returns>The index of the found player</returns>
+	int BinarySearch(Player* playerList, int left, int right, unsigned int targetScore);
 
 
 
