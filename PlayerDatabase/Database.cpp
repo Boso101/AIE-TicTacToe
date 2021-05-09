@@ -12,9 +12,9 @@ void Database::WriteFile(const char* directory)
 	if (file.is_open())
 	{
 
-	
+	int size = sizeof(Player) * loadedPlayerCount;
 	// Write out the file
-	file.write((char*)loadedPlayers, sizeof(Player) * loadedPlayerCount);
+	file.write((char*)loadedPlayers, size);
 	}
 	else
 	{
@@ -35,8 +35,13 @@ void Database::ReadFile(const char* file)
 		return;
 	}
 
+	//load up the array of player pointers
 	fileS.read(reinterpret_cast<char*>(loadedPlayers), fileS.tellg());
+
+	//loadedPlayerCount is the size of how many file elements exist
 	loadedPlayerCount = fileS.tellg();
+
+	std::cout << "Sucessfully Loaded " << loadedPlayerCount << " Players." << std::endl;
 	fileS.close();
 	
 
@@ -136,7 +141,6 @@ Database::Database(unsigned int maximumPlayers)
 	
 	loadedPlayers = new Player[this->maxPlayers];
 
-	ReadFile("PlayerList.bin");
 
 	state = DatabaseState::LOAD_PROFILES;
 }
