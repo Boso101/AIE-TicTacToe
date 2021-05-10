@@ -11,6 +11,11 @@ struct Database
 	Database(unsigned int maxPlayers);
 	~Database();
 
+	/// <summary>
+	/// Easy getters for elements
+	/// </summary>
+	const Player* FirstElement();
+	const Player* LastElement();
 
 	/// <summary>
 	/// Write out the binary file containing all the players in the database
@@ -77,6 +82,11 @@ struct Database
 	int loadedPlayerCount = 0;
 	Player* loadedPlayers;
 	DatabaseState state;
+
+	/// <summary>
+	/// Print all Players
+	/// </summary>
+	void PrintAllPlayers();
 
 
 private:

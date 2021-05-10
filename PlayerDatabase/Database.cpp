@@ -233,6 +233,28 @@ bool  Database::IsFull()
 	return loadedPlayerCount == maxPlayers;
 }
 
+const Player* Database::FirstElement()
+{
+	return loadedPlayers;
+}
+
+const Player* Database::LastElement()
+{
+	return loadedPlayers + loadedPlayerCount;
+}
+
+void Database::PrintAllPlayers()
+{
+	std::cout << "\n" << std::endl;
+	for (int i = 0; i < loadedPlayerCount; i++)
+	{
+		std::cout << "[" << i << "]" << " ";
+		loadedPlayers[i].PrintInformation();
+	}
+	std::cout << "\n" << std::endl;
+}
+
+
 Database::~Database()
 {
 	WriteFile("PlayerList.bin");

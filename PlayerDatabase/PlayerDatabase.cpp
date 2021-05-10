@@ -26,6 +26,7 @@ int main()
         std::cout << "Please decide on an action with the following commands.\n" << std::endl;
         std::cout << "== Commands == " << std::endl;
         std::cout << "add - Create a new Player Profile " << std::endl;
+        std::cout << "remove - Remove a Player Profile" << std::endl;
         std::cout << "modify - Modify an existing player " << std::endl;
         std::cout << "save - Save all Players to file. " << std::endl;
         std::cout << "view - View all players" << std::endl;
@@ -49,16 +50,11 @@ int main()
         }
 
 
-        // view all profiles in alphabetical order
+        // view all profiles 
 
         else if (choice == "view")
         {
-            std::cout << "\n" << std::endl;
-            for (int i = 0; i < db.loadedPlayerCount; i++)
-            {
-                db.loadedPlayers[i].PrintInformation();
-            }
-            std::cout << "\n" << std::endl;
+            db.state = DatabaseState::SHOW_ALL_PROFILES;
 
         }
 
@@ -74,6 +70,11 @@ int main()
         else if (choice == "binary-s")
         {
             db.state = DatabaseState::SEARCH_PROFILE;
+        }
+
+        else if (choice == "remove")
+        {
+            db.state = DatabaseState::REMOVE_PROFILE;
         }
 
 
@@ -154,6 +155,35 @@ int main()
     case(DatabaseState::LOAD_PROFILES):
     {
         db.ReadFile("PlayerList.bin");
+        db.state = DatabaseState::USER_INPUT;
+        break;
+    }
+    case(DatabaseState::REMOVE_PROFILE):
+    {
+        unsigned int scr;
+        db.PrintAllPlayers();
+        std::cout << "Please input the element for the player you wish to remove.\n" << std::endl;
+        std::cin >> scr;
+
+        //Deletus 
+        if (scr <= db.loadedPlayerCount)
+        {
+
+        }
+        else
+        {
+            std::cout << "The given element does not exist in the loaded player list..." << std::endl;
+
+        }
+
+
+        db.state = DatabaseState::USER_INPUT;
+
+        break;
+    }
+    case (DatabaseState::SHOW_ALL_PROFILES):
+    {
+        db.PrintAllPlayers();
         db.state = DatabaseState::USER_INPUT;
         break;
     }
