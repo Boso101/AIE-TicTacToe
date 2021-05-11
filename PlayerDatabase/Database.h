@@ -80,7 +80,7 @@ struct Database
 	/// Keeps track of the amount of loaded players in the loadedPlayer array
 	/// </summary>
 	int loadedPlayerCount = 0;
-	Player* loadedPlayers;
+	Player* loadedPlayers = nullptr;
 	DatabaseState state;
 
 	/// <summary>

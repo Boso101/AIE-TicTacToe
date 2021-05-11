@@ -12,7 +12,7 @@ int main()
     std::cout << "**************************" << std::endl;
 
 
-    Database db(4);
+    Database db(16);
 
     while (running)
     {
@@ -96,6 +96,8 @@ int main()
         std::cin >> playerName;
 
         // Then prompt user to input highscore
+
+        //TODO: Make sure it is a number
         std::cout << "Player Score: ";
         std::cin >> highScore;
 

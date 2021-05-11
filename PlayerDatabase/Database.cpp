@@ -12,11 +12,11 @@ bool Database::WriteFile(const char* directory)
 
 	if (file.good())
 	{
-		BubbleSortPlayers(loadedPlayers);
+		//BubbleSortPlayers(loadedPlayers);
 
 
 		//Write maximum players out
-		file.write((const char*) & loadedPlayers, sizeof(loadedPlayers));
+		file.write((const char*) & maxPlayers, sizeof(maxPlayers));
 
 		//Write players in use
 		file.write((const char*)&loadedPlayerCount, sizeof(loadedPlayerCount));
@@ -72,21 +72,25 @@ bool Database::ReadFile(const char* file)
 		}
 
 		std::cout << "Sucessfully Loaded " << loadedPlayerCount << " Players." << std::endl;
+
+
+		//Match the count from the file
 		this->loadedPlayerCount = currentPlayersInUse;
 
 		
 		//Read the array of players
-		fileS.read((char*)loadedPlayers, loadedPlayerCount * sizeof(Player) );
+		fileS.read((char*)loadedPlayers, currentPlayersInUse * sizeof(Player) );
 
 
 
 		//Give it a sort
-		BubbleSortPlayers(loadedPlayers);
+	//	BubbleSortPlayers(loadedPlayers);
 		fileS.close();
 		return true;
 	}
 
-	
+	fileS.close();
+	return false;
 }
 
 void Database::BubbleSortPlayers(Player* playerList)
@@ -94,7 +98,7 @@ void Database::BubbleSortPlayers(Player* playerList)
 	{
 	
 		int i, j;
-		for (i = 0; i < this->maxPlayers - 1; i++)
+		for (i = 0; i < this->loadedPlayerCount - 1; i++)
 
 			// Last i elements are already in place 
 			for (j = 0; j < this->maxPlayers - 1; j++)
@@ -301,7 +305,7 @@ void Database::PrintAllPlayers()
 
 Database::~Database()
 {
-	WriteFile("PlayerList.bin");
+	//WriteFile("PlayerList.bin");
 	delete[] loadedPlayers;
 	delete this;
 }
