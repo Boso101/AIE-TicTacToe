@@ -21,13 +21,13 @@ struct Database
 	/// Write out the binary file containing all the players in the database
 	/// </summary>
 	/// <param name="directory"></param>
-	void WriteFile(const char* directory);
+	bool WriteFile(const char* directory);
 
 	/// <summary>
 	/// Read the binary file and load all the players in the database
 	/// </summary>
 	/// <param name="file"></param>
-	void ReadFile(const char* file);
+	bool ReadFile(const char* file);
 
 	/// <summary>
 	/// Add player by passing in parameters of a player then calling a player constructor
