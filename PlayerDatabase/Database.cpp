@@ -9,20 +9,26 @@ bool Database::WriteFile(const char* directory)
 	std::fstream file;
 	file.open(directory, std::ios::out | std::ios::binary);
 
-	if (file.is_open())
-	{
 
-	int size = sizeof(Player) * loadedPlayerCount;
-	// Write out the file
-	file.write((char*)loadedPlayers, size);
-	}
-	else
+	if (file.good())
 	{
-		return false;
-	}
+		BubbleSortPlayers(loadedPlayers);
 
-	file.close();
-	return true;
+
+		//Write maximum players out
+		file.write((const char*) & loadedPlayers, sizeof(loadedPlayers));
+
+		//Write players in use
+		file.write((const char*)&loadedPlayerCount, sizeof(loadedPlayerCount));
+
+		// Write our list of players
+		file.write((const char*)loadedPlayers, loadedPlayerCount * sizeof(Player) );
+
+
+
+
+
+	}
 }
 
 bool Database::ReadFile(const char* file)
@@ -67,7 +73,7 @@ bool Database::ReadFile(const char* file)
 
 		
 		//Read the array of players
-		fileS.read((char*)loadedPlayers, sizeof(Player) * (int)loadedPlayerCount);
+		fileS.read((char*)loadedPlayers, loadedPlayerCount * sizeof(Player) );
 
 
 
