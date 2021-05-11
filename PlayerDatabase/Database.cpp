@@ -30,26 +30,53 @@ bool Database::ReadFile(const char* file)
 	std::fstream fileS;
 	fileS.open(file, std::ios::in | std::ios::binary);
 	
-	if (!fileS.is_open())
+	if (fileS.good())
 	{
+		unsigned int maximumPlayers;
+		//load up the array of player pointers
+		fileS.read((char*)&maximumPlayers, sizeof(unsigned int));
 
-		return false;
+		if (maximumPlayers > 10000)
+		{
+			fileS.close();
+			return false;
+		}
+
+		//Reallocate player list if different size
+		if (this->maxPlayers != maximumPlayers)
+		{
+			this->maxPlayers = maximumPlayers;
+			delete[] this->loadedPlayers;
+			this->loadedPlayers = new Player[maximumPlayers];
+		}
+
+		//loadedPlayerCount is the size of how many file elements exist
+
+		//Read players in use 
+		unsigned int currentPlayersInUse;
+		fileS.read((char*)&currentPlayersInUse, sizeof(unsigned int));
+
+		if (currentPlayersInUse > maximumPlayers)
+		{
+			fileS.close();
+			return false;
+		}
+
+		std::cout << "Sucessfully Loaded " << loadedPlayerCount << " Players." << std::endl;
+		this->loadedPlayerCount = currentPlayersInUse;
+
+		
+		//Read the array of players
+		fileS.read((char*)loadedPlayers, sizeof(Player) * (int)loadedPlayerCount);
+
+
+
+		//Give it a sort
+		BubbleSortPlayers(loadedPlayers);
+		return true;
 	}
 
-	//load up the array of player pointers
-	fileS.read(reinterpret_cast<char*>(loadedPlayers), fileS.tellg());
-
-	//loadedPlayerCount is the size of how many file elements exist
-	loadedPlayerCount = fileS.tellg();
-
-	std::cout << "Sucessfully Loaded " << loadedPlayerCount << " Players." << std::endl;
-	fileS.close();
-	return true;
 	
-
-
-	//Give it a sort
-	BubbleSortPlayers(loadedPlayers);
 }
 
 void Database::BubbleSortPlayers(Player* playerList)

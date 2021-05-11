@@ -74,7 +74,7 @@ struct Database
 	// Limit of max players
 	const static unsigned int MAX_PLAYERS = 16;
 	
-	int maxPlayers;
+	unsigned int maxPlayers;
 
 	/// <summary>
 	/// Keeps track of the amount of loaded players in the loadedPlayer array
