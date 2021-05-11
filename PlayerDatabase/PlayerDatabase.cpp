@@ -32,6 +32,7 @@ int main()
         std::cout << "load - Load all Player Profiles from a file. " << std::endl;
         std::cout << "view - View all Player Profiles" << std::endl;
         std::cout << "binary-s - Binary search for a player with a specified score" << std::endl;
+        std::cout << "bsort - Bubble Sorts the Player Profiles" << std::endl;
 
         std::cin >> choice;
 
@@ -42,6 +43,12 @@ int main()
         {
             db.state = DatabaseState::CREATE_PROFILE;
 
+        }
+
+        else if (choice == "bsort")
+        {
+            db.BubbleSortPlayers(db.loadedPlayers);
+            db.state = DatabaseState::USER_INPUT;
         }
 
         // Save all the profiles

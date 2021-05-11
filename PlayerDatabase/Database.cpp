@@ -12,7 +12,7 @@ bool Database::WriteFile(const char* directory)
 
 	if (file.good())
 	{
-		//BubbleSortPlayers(loadedPlayers);
+		BubbleSortPlayers(loadedPlayers);
 
 
 		//Write maximum players out
@@ -83,8 +83,8 @@ bool Database::ReadFile(const char* file)
 
 
 
-		//Give it a sort
-	//	BubbleSortPlayers(loadedPlayers);
+		//Give it a sort just incase
+		BubbleSortPlayers(loadedPlayers);
 		fileS.close();
 		return true;
 	}
@@ -99,11 +99,17 @@ void Database::BubbleSortPlayers(Player* playerList)
 	
 		int i, j;
 		for (i = 0; i < this->loadedPlayerCount - 1; i++)
-
+		{ 
 			// Last i elements are already in place 
-			for (j = 0; j < this->maxPlayers - 1; j++)
+			for (j = 0; j < this->loadedPlayerCount - 1 ; j++)
+			{
+
+			
+				//Swap so that highest comes first
 				if (playerList[j].highScore < loadedPlayers[j + 1].highScore)
-					Database::Swap(&loadedPlayers[j], &loadedPlayers[j - 1]);
+					Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
+			}
+		}
 	}
 
 
