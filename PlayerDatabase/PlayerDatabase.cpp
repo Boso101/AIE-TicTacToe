@@ -29,6 +29,7 @@ int main()
         std::cout << "remove - Remove a Player Profile" << std::endl;
         std::cout << "modify - Modify an existing Player Profile " << std::endl;
         std::cout << "save - Save all Player Profiles to a file. " << std::endl;
+        std::cout << "load - Load all Player Profiles from a file. " << std::endl;
         std::cout << "view - View all Player Profiles" << std::endl;
         std::cout << "binary-s - Binary search for a player with a specified score" << std::endl;
 
@@ -77,6 +78,10 @@ int main()
             db.state = DatabaseState::REMOVE_PROFILE;
         }
 
+        else if (choice == "load")
+        {
+            db.state = DatabaseState::LOAD_PROFILES;
+        }
 
             break;
     }
