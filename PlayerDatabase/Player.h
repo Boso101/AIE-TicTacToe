@@ -2,7 +2,7 @@
 
 struct  Player
 {
-	static const unsigned int NAME_LENGTH = 16;
+	static const unsigned int NAME_LENGTH = 64;
 	//Constructor 
 	Player(const char* name, unsigned int highScore);
 	Player();

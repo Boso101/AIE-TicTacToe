@@ -185,6 +185,8 @@ void Database::BinarySearchPlayer(unsigned int highScore)
 	
 
 	int element = BinarySearch(loadedPlayers, 0, loadedPlayerCount - 1, highScore);
+
+	//Algorithm returns -1 if it did not find
 	if (element != -1)
 	{
 		std::cout << "Found an entry" << std::endl;
