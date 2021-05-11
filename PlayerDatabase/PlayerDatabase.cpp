@@ -107,16 +107,25 @@ int main()
     {
         unsigned int element;
 
-        std::cout << "Please enter player position to modify." << std::endl;
+        db.PrintAllPlayers();
+        std::cout << "Please enter player element to modify." << std::endl;
 
         std::cin >> element;
         Player& currentP = db.loadedPlayers[element];
 
-
+        // A way to check if the player has been initialized
         if (element <= db.loadedPlayerCount)
         {
             //Begin modifiying
+            // Special case for when both are 0
+            if (element == 0 && db.loadedPlayerCount == 0)
+            {
 
+
+                std::cout << "Empty list of player profiles." << std::endl;
+                db.state = DatabaseState::USER_INPUT;
+                break;
+            }
             db.ModifyPlayerPrompt(currentP);
 
         }

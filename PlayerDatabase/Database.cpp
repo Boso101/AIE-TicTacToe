@@ -246,11 +246,14 @@ const Player* Database::LastElement()
 void Database::PrintAllPlayers()
 {
 	std::cout << "\n" << std::endl;
+	std::cout << "==========================" << std::endl;
 	for (int i = 0; i < loadedPlayerCount; i++)
 	{
 		std::cout << "[" << i << "]" << " ";
 		loadedPlayers[i].PrintInformation();
 	}
+	std::cout << "==========================" << std::endl;
+
 	std::cout << "\n" << std::endl;
 }
 

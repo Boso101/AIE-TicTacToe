@@ -20,5 +20,6 @@ void Player::PrintInformation()
 }
 Player::Player()
 {
-
+	// Not my favourite thing to do but works for error checking
+	strcpy_s(this->playerName, NAME_LENGTH, "null");
 }
