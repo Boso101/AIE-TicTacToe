@@ -26,9 +26,12 @@ bool Database::WriteFile(const char* directory)
 
 
 
-
-
+		file.close();
+		return true;
 	}
+
+	file.close();
+	return false;
 }
 
 bool Database::ReadFile(const char* file)
@@ -79,6 +82,7 @@ bool Database::ReadFile(const char* file)
 
 		//Give it a sort
 		BubbleSortPlayers(loadedPlayers);
+		fileS.close();
 		return true;
 	}
 
