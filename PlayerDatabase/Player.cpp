@@ -19,6 +19,11 @@ void Player::PrintInformation()
 
 }
 
+bool Player::operator<(const Player& other) const
+{
+	return highScore < other.highScore;
+}
+
  char* const Player::GetName()
 {
 	 return playerName;

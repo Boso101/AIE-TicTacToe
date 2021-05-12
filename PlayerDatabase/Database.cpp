@@ -98,67 +98,89 @@ bool Database::ReadFile(const char* file)
 void Database::BubbleSortPlayersByScore(Player* playerList, char op)
 
 	{
-	int i, j;
-		for (i = 0; i < this->loadedPlayerCount - 1; i++)
-		{ 
-			// Last i elements are already in place 
-			for (j = 0; j < this->loadedPlayerCount - 1 ; j++)
-			{
-				//desc
-				if (op == '>')
-				{
-					//Swap so that highest comes first
-					if (playerList[j].highScore > loadedPlayers[j - 1].highScore)
-						Database::Swap(&loadedPlayers[j], &loadedPlayers[j - 1]);
-				}
+	//int i, j;
+	//	for (i = 0; i < this->loadedPlayerCount - 1; i++)
+	//	{ 
+	//		// Last i elements are already in place 
+	//		for (j = 0; j < this->loadedPlayerCount - 1 ; j++)
+	//		{
+	//			//desc
+	//			if (op == '>')
+	//			{
+	//				//Swap so that highest comes first
+	//				if (playerList[j].highScore > loadedPlayers[j - 1].highScore)
+	//					Database::Swap(&loadedPlayers[j], &loadedPlayers[j - 1]);
+	//			}
 
-				//asc
-				else
-				{
-					if (playerList[j].highScore > loadedPlayers[j + 1].highScore)
-						Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
-				}
+	//			//asc
+	//			else
+	//			{
+	//				if (playerList[j].highScore > loadedPlayers[j + 1].highScore)
+	//					Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
+	//			}
 
-			
-			}
-		}
+	//		
+	//		}
+	//	}
+
+	if (op == '>')
+	{
+		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount, ComparePlayerScoreDesc);
+
+	}
+	else
+	{
+		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount, ComparePlayerScoreAsc);
+
+	}
+
 	}
 
 void Database::BubbleSortPlayersByName(Player* playerList, char op)
 
 {
-	int i, j;
-	for (i = 0; i < this->loadedPlayerCount - 1; i++)
+	//int i, j;
+	//for (i = 0; i < this->loadedPlayerCount - 1; i++)
+	//{
+	//	// Last i elements are already in place 
+	//	for (j = 0; j < this->loadedPlayerCount - 1; j++)
+	//	{
+
+	//		//desc
+	//		if (op == '>')
+	//		{
+	//			//Swap so that highest comes first
+	//			if (playerList[j].GetName() > loadedPlayers[j - 1].GetName())
+	//				Database::Swap(&loadedPlayers[j], &loadedPlayers[j - 1]);
+	//		}
+
+	//		//asc
+	//		else
+	//		{
+	//			if (playerList[j].GetName() > loadedPlayers[j + 1].GetName())
+	//				Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
+	//		}
+
+
+	//	}
+	//}
+
+	if (op == '>')
 	{
-		// Last i elements are already in place 
-		for (j = 0; j < this->loadedPlayerCount - 1; j++)
-		{
+		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount);
 
-			if (op == '>')
-			{
-				//Swap so that highest comes first
-				if (playerList[j].GetName() > loadedPlayers[j - 1].GetName())
-					Database::Swap(&loadedPlayers[j], &loadedPlayers[j - 1]);
-			}
-			else
-			{
-				if (playerList[j].GetName() < loadedPlayers[j + 1].GetName())
-					Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
-			}
+	}
+	else
+	{
+		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount);
 
 
-		}
 	}
 }
 
 
 
-void Database::Swap(Player* p1, Player* p2)
-{
-	Player temp = *p1;
-	*p1 = *p2;
-	*p2 = temp;
-}
+
 
 void Database::ModifyPlayerPrompt(Player& player)
 {
@@ -287,6 +309,7 @@ void Database::BinarySearchPlayer(unsigned int highScore)
 
 }
 
+//TODO: Change to name instead
 int Database::BinarySearch(Player* playerList, int left, int right, unsigned int targetScore)
 {
 	// A recursive binary search function. It returns
@@ -332,6 +355,16 @@ const Player* Database::LastElement()
 	return loadedPlayers + loadedPlayerCount;
 }
 
+Player& Database::operator[](unsigned int pos)
+{
+	if (pos < loadedPlayerCount)
+		return loadedPlayers[pos];
+
+	else
+		throw std::out_of_range("Invalid Element");
+
+}
+
 void Database::PrintAllPlayers()
 {
 	std::cout << "\n" << std::endl;
@@ -344,6 +377,28 @@ void Database::PrintAllPlayers()
 	std::cout << "==========================" << std::endl;
 
 	std::cout << "\n" << std::endl;
+}
+
+//TODO: Interface
+//Should really have this as an interface eventually
+bool Database::ComparePlayerScoreDesc(Player& left, Player& right)
+{
+	return left.highScore > right.highScore;
+}
+
+bool Database::ComparePlayerScoreAsc(Player& left,  Player& right)
+{
+	return left.highScore < right.highScore;
+}
+
+bool Database::ComparePlayerNameDesc(Player& left, Player& right)
+{
+	return (strcmp(left.playerName, right.playerName) > 0);
+}
+
+bool Database::ComparePlayerNameAsc(Player& left, Player& right)
+{
+	return (strcmp(left.playerName, right.playerName) < 0);
 }
 
 

@@ -14,5 +14,8 @@ struct  Player
 	 char* const GetName();
 	void PrintInformation();
 
+	//highscore compare
+	bool operator<(const Player& other) const;
+
 
 };

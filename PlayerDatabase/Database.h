@@ -17,6 +17,8 @@ struct Database
 	const Player* FirstElement();
 	const Player* LastElement();
 
+	Player& operator[](unsigned int pos);
+
 	/// <summary>
 	/// Write out the binary file containing all the players in the database
 	/// </summary>
@@ -95,8 +97,14 @@ struct Database
 	/// </summary>
 	void PrintAllPlayers();
 
+	// Helper methods for sorting
 
-private:
-	//Helper Method
-	void Swap(Player* p, Player* p2);
+	static bool ComparePlayerScoreDesc( Player& left,  Player& right);
+	static bool ComparePlayerScoreAsc( Player& left,  Player& right);
+
+	static bool ComparePlayerNameDesc( Player& left,  Player& right);
+	static bool ComparePlayerNameAsc( Player& left,  Player& right);
+
+
+
 };

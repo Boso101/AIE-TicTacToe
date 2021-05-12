@@ -79,11 +79,15 @@ int main()
                 db.BubbleSortPlayersByScore(db.loadedPlayers, comp);
             }
             //name sort
-            else
+            else if (type == "name")
             {
                 db.BubbleSortPlayersByName(db.loadedPlayers, comp);
 
            
+            }
+            else
+            {
+                std::cout << "Incorrect sort type given" << std::endl;
             }
 
 
