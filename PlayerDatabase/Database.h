@@ -106,5 +106,6 @@ struct Database
 	static bool ComparePlayerNameAsc( Player& left,  Player& right);
 
 
+	static bool ComparePlayerNameDescEqual(Player& left, Player& right);
 
 };

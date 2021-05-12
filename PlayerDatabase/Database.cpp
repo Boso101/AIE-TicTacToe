@@ -93,8 +93,7 @@ bool Database::ReadFile(const char* file)
 	return false;
 }
 
-//Probably could have avoided having two seperate functions but for now it will do
-//TODO: Only have one function
+
 void Database::BubbleSortPlayersByScore(Player* playerList, char op)
 
 	{
@@ -309,7 +308,7 @@ void Database::BinarySearchPlayer(unsigned int highScore)
 
 }
 
-//TODO: Change to name instead
+//TODO: Change to name instead of targetScore
 int Database::BinarySearch(Player* playerList, int left, int right, unsigned int targetScore)
 {
 	// A recursive binary search function. It returns
@@ -399,6 +398,11 @@ bool Database::ComparePlayerNameDesc(Player& left, Player& right)
 bool Database::ComparePlayerNameAsc(Player& left, Player& right)
 {
 	return (strcmp(left.playerName, right.playerName) < 0);
+}
+
+bool Database::ComparePlayerNameDescEqual(Player& left, Player& right)
+{
+	return (strcmp(left.playerName, right.playerName) > 0);
 }
 
 
