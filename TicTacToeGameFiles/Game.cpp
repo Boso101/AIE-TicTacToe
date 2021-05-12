@@ -248,7 +248,7 @@ void Game::AIAction()
 	if(!IsThereWinner() && turnPlayer.isAI)
 	{
 		// AI Logic Here
-		// For now iteratively place in the next free spot
+		
 		BoardSlot slot = freeSlots.at(rand() % freeSlots.size());
 		PlaceSymbol(slot.row, slot.column);
 		
