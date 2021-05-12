@@ -47,7 +47,46 @@ int main()
 
         else if (choice == "bsort")
         {
-            db.BubbleSortPlayers(db.loadedPlayers);
+            std::string comparison;
+            std::string type;
+            char comp = '>';
+
+            //keep user in here if the user doesnt give asc or desc
+            while (comparison != "asc" && comparison != "desc")
+            {
+
+
+                std::cout << "Please enter how you want to sort this player profiles (asc or desc)" << std::endl;
+                std::cin >> comparison;
+            }
+                std::cout << "Sort by highscore or name?" << std::endl;
+                std::cin >> type;
+            
+            //convert comparison
+            if (comparison == "asc")
+            {
+                comp = '<';
+            }
+            else
+            {
+                comp = '>';
+            }
+
+       
+            //highscore sort
+            if (type == "highscore")
+            {
+                db.BubbleSortPlayersByScore(db.loadedPlayers, comp);
+            }
+            //name sort
+            else
+            {
+                db.BubbleSortPlayersByName(db.loadedPlayers, comp);
+
+           
+            }
+
+
             db.state = DatabaseState::USER_INPUT;
         }
 

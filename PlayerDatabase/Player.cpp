@@ -18,6 +18,12 @@ void Player::PrintInformation()
 	std::cout <<", " <<  this->playerName << std::endl;
 
 }
+
+ char* const Player::GetName()
+{
+	 return playerName;
+}
+
 Player::Player()
 {
 	// Not my favourite thing to do but works for error checking

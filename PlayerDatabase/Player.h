@@ -11,7 +11,7 @@ struct  Player
 	char playerName[NAME_LENGTH];
 
 
-
+	 char* const GetName();
 	void PrintInformation();
 
 

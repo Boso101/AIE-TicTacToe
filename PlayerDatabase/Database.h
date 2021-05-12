@@ -41,7 +41,14 @@ struct Database
 	/// </summary>
 	/// <param name="player"></param>
 	void AddPlayer(Player& player);
-	void BubbleSortPlayers(Player* playerList);
+
+	/// <summary>
+	/// Bubbme sort function for score
+	/// </summary>
+	/// <param name="playerList"></param>
+	/// <param name="op"></param>
+	void BubbleSortPlayersByScore(Player* playerList, char op);
+	void BubbleSortPlayersByName(Player* playerList, char op);
 	bool IsFull();
 
 	/// <summary>

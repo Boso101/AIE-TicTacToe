@@ -12,7 +12,7 @@ bool Database::WriteFile(const char* directory)
 
 	if (file.good())
 	{
-		BubbleSortPlayers(loadedPlayers);
+		BubbleSortPlayersByName(loadedPlayers, '>');
 
 
 		//Write maximum players out
@@ -84,7 +84,7 @@ bool Database::ReadFile(const char* file)
 
 
 		//Give it a sort just incase
-		BubbleSortPlayers(loadedPlayers);
+	//	BubbleSortPlayersByName(loadedPlayers, '>');
 		fileS.close();
 		return true;
 	}
@@ -93,25 +93,63 @@ bool Database::ReadFile(const char* file)
 	return false;
 }
 
-void Database::BubbleSortPlayers(Player* playerList)
+//Probably could have avoided having two seperate functions but for now it will do
+//TODO: Only have one function
+void Database::BubbleSortPlayersByScore(Player* playerList, char op)
 
 	{
-	
-		int i, j;
+	int i, j;
 		for (i = 0; i < this->loadedPlayerCount - 1; i++)
 		{ 
 			// Last i elements are already in place 
 			for (j = 0; j < this->loadedPlayerCount - 1 ; j++)
 			{
+				//desc
+				if (op == '>')
+				{
+					//Swap so that highest comes first
+					if (playerList[j].highScore > loadedPlayers[j - 1].highScore)
+						Database::Swap(&loadedPlayers[j], &loadedPlayers[j - 1]);
+				}
+
+				//asc
+				else
+				{
+					if (playerList[j].highScore > loadedPlayers[j + 1].highScore)
+						Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
+				}
 
 			
-				//Swap so that highest comes first
-				if (playerList[j].highScore < loadedPlayers[j + 1].highScore)
-					Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
 			}
 		}
 	}
 
+void Database::BubbleSortPlayersByName(Player* playerList, char op)
+
+{
+	int i, j;
+	for (i = 0; i < this->loadedPlayerCount - 1; i++)
+	{
+		// Last i elements are already in place 
+		for (j = 0; j < this->loadedPlayerCount - 1; j++)
+		{
+
+			if (op == '>')
+			{
+				//Swap so that highest comes first
+				if (playerList[j].GetName() > loadedPlayers[j - 1].GetName())
+					Database::Swap(&loadedPlayers[j], &loadedPlayers[j - 1]);
+			}
+			else
+			{
+				if (playerList[j].GetName() < loadedPlayers[j + 1].GetName())
+					Database::Swap(&loadedPlayers[j], &loadedPlayers[j + 1]);
+			}
+
+
+		}
+	}
+}
 
 
 
@@ -230,8 +268,8 @@ void Database::AddPlayer(Player& player)
 void Database::BinarySearchPlayer(unsigned int highScore)
 {
 	// Sort first
-	BubbleSortPlayers(loadedPlayers);
-	
+	BubbleSortPlayersByName(loadedPlayers, '>');
+
 
 	int element = BinarySearch(loadedPlayers, 0, loadedPlayerCount - 1, highScore);
 
