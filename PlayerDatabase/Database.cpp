@@ -84,7 +84,7 @@ bool Database::ReadFile(const char* file)
 
 
 		//Give it a sort just incase
-	//	BubbleSortPlayersByName(loadedPlayers, '>');
+	    BubbleSortPlayersByName(loadedPlayers, '>');
 		fileS.close();
 		return true;
 	}
@@ -167,12 +167,12 @@ void Database::BubbleSortPlayersByName(Player* playerList, char op)
 
 	if (op == '>')
 	{
-		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount);
+		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount, ComparePlayerNameDesc);
 
 	}
 	else
 	{
-		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount);
+		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount, ComparePlayerNameAsc);
 
 
 	}
