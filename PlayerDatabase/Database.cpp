@@ -88,6 +88,8 @@ bool Database::ReadFile(const char* file)
 		fileS.close();
 		return true;
 	}
+	
+	std::cout << "No File Detected..." << std::endl;
 
 	fileS.close();
 	return false;
@@ -193,20 +195,22 @@ void Database::ModifyPlayerPrompt(Player& player)
 		if (choice == "name")
 		{
 			// if we are here then we decided to modify the name
-			Database::ModifyPlayerNamePrompt(player);
+			Database::ModifyPlayerEntry("PlayerList.bin",player,"name");
 			
 		}
 		else if (choice == "score")
 		{
-			Database::ModifyHighScorePrompt(player);
+			Database::ModifyPlayerEntry("PlayerList.bin", player, "score");
 
 
 		}
+
+	
 	}
 
-void Database::ModifyPlayerNamePrompt(Player& player)
+char* Database::ModifyPlayerNamePrompt()
 {
-	std::string newName;
+	char* newName;
 
 	std::cout << "New Name : ";
 	std::cin >> newName;
@@ -215,12 +219,60 @@ void Database::ModifyPlayerNamePrompt(Player& player)
 	//Change if something new
 	if (newName != "")
 	{
-		strcpy_s(player.playerName, Player::NAME_LENGTH, newName.c_str());
-		std::cout << "Name changed sucessfully!" << std::endl;
+		return newName;
 	}
 }
 
-void Database::ModifyHighScorePrompt(Player& player)
+void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const char* modType)
+{
+	std::fstream file(directory, std::ios_base::in | std::ios_base::out | std::ios_base::binary);
+	
+	
+	
+	if (file.good())
+	{
+
+		//Pass the header stuff
+		file.read((char*)&maxPlayers, sizeof(maxPlayers));
+		file.read((char*)&loadedPlayerCount, sizeof(loadedPlayerCount));
+
+		//Iterate through players and compare name
+
+		//current looking player
+		Player p;
+
+		while (!file.eof())
+		{
+			file.read((char*)&p, sizeof(Player));
+			
+			// We found our player
+		
+			if (toModify.GetName() == p.GetName())
+			{
+				//check what we need to change
+				if (modType == "name")
+				{
+					char* newName = ModifyPlayerNamePrompt();
+				}
+				else if (modType == "highscore")
+				{
+					unsigned int newScore = ModifyHighScorePrompt();
+				}
+			}
+		}
+
+		
+
+
+	}
+
+	file.close();
+	
+	//Reload Database
+	ReadFile("PlayerList.bin");
+}
+
+unsigned int Database::ModifyHighScorePrompt()
 {
 	unsigned int newScore;
 	// here because we decided to change the high score
@@ -235,8 +287,8 @@ void Database::ModifyHighScorePrompt(Player& player)
 		newScore = 0;
 	}
 
-	player.highScore = newScore;
-	std::cout << "Score changed sucessfully!" << std::endl;
+	return newScore;
+
 }
 
 

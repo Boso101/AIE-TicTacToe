@@ -59,8 +59,15 @@ struct Database
 	/// <param name="player"></param>
 	void ModifyPlayerPrompt(Player& player);
 
-	void ModifyHighScorePrompt(Player& player);
-	void ModifyPlayerNamePrompt(Player& player);
+	unsigned int ModifyHighScorePrompt();
+	char* ModifyPlayerNamePrompt();
+
+
+	/// <summary>
+	/// Use this method to scan through the file and find the modified player
+	/// </summary>
+	/// <param name="toModify"></param>
+	void ModifyPlayerEntry(const char* directory, Player& toModify, const char* modType);
 
 
 	/// <summary>
@@ -71,6 +78,7 @@ struct Database
 	void BinarySearchPlayer(unsigned int highScore);
 
 
+	//TODO: Name Version
 	/// <summary>
 	/// The actual binary search recursive algorithm
 	/// </summary>
