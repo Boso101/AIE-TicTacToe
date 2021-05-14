@@ -60,7 +60,7 @@ struct Database
 	void ModifyPlayerPrompt(Player& player);
 
 	unsigned int ModifyHighScorePrompt();
-	char* ModifyPlayerNamePrompt();
+	std::string ModifyPlayerNamePrompt();
 
 
 	/// <summary>

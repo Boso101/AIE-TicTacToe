@@ -198,7 +198,7 @@ void Database::ModifyPlayerPrompt(Player& player)
 			Database::ModifyPlayerEntry("PlayerList.bin",player,"name");
 			
 		}
-		else if (choice == "score")
+		else if (choice == "score" || choice == "highscore")
 		{
 			Database::ModifyPlayerEntry("PlayerList.bin", player, "score");
 
@@ -208,9 +208,9 @@ void Database::ModifyPlayerPrompt(Player& player)
 	
 	}
 
-char* Database::ModifyPlayerNamePrompt()
+std::string Database::ModifyPlayerNamePrompt()
 {
-	char* newName;
+	char* newName = nullptr;
 
 	std::cout << "New Name : ";
 	std::cin >> newName;
@@ -231,10 +231,10 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 	
 	if (file.good())
 	{
-
-		//Pass the header stuff
-		file.read((char*)&maxPlayers, sizeof(maxPlayers));
-		file.read((char*)&loadedPlayerCount, sizeof(loadedPlayerCount));
+		int constexpr playerSize = sizeof(Player);
+		//Pass the header stuff such as loaded player count and max players
+		
+		file.seekg(sizeof(unsigned int) * 2);
 
 		//Iterate through players and compare name
 
@@ -243,21 +243,37 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 
 		while (!file.eof())
 		{
-			file.read((char*)&p, sizeof(Player));
+			file.read((char*)&p, playerSize);
 			
 			// We found our player
 		
-			if (toModify.GetName() == p.GetName())
+			if (*toModify.playerName == *p.playerName)
 			{
+				//offset start player
+				file.seekg(-playerSize, file.cur);
+
 				//check what we need to change
 				if (modType == "name")
 				{
-					char* newName = ModifyPlayerNamePrompt();
+					strcpy_s(p.playerName, Player::NAME_LENGTH, ModifyPlayerNamePrompt().c_str());
+
+					
+
+					//Overwrite name
+
+					file.write((const char*)&p, playerSize);
+					return;
 				}
 				else if (modType == "highscore")
 				{
-					unsigned int newScore = ModifyHighScorePrompt();
+					p.highScore = ModifyHighScorePrompt();
+
+					//Overwrite Score
+					file.write((const char*)&p, playerSize);
+					return;
 				}
+
+				
 			}
 		}
 
