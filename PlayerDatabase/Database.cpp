@@ -262,6 +262,7 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 					//Overwrite name
 
 					file.write((const char*)&p, playerSize);
+					file.close();
 					return;
 				}
 				else if (modType == "highscore")
@@ -270,6 +271,7 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 
 					//Overwrite Score
 					file.write((const char*)&p, playerSize);
+					file.close();
 					return;
 				}
 
