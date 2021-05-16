@@ -332,6 +332,7 @@ void Database::AddPlayer(const std::string& nameP, unsigned int highScore)
 		loadedPlayers[loadedPlayerCount] = Player(nameP.c_str(), highScore);
 		//Increase player in use after adding 
 		loadedPlayerCount++;
+
 	}
 	else
 	{
