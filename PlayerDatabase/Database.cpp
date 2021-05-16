@@ -210,17 +210,15 @@ void Database::ModifyPlayerPrompt(Player& player)
 
 std::string Database::ModifyPlayerNamePrompt()
 {
-	char* newName = nullptr;
+	std::string newName = "";
 
 	std::cout << "New Name : ";
 	std::cin >> newName;
 
 
-	//Change if something new
-	if (newName != "")
-	{
-		return newName;
-	}
+	
+	return newName;
+	
 }
 
 void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const char* modType)
@@ -235,6 +233,8 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 		//Pass the header stuff such as loaded player count and max players
 		
 		file.seekg(sizeof(unsigned int) * 2);
+
+		bool complete = false;
 
 		//Iterate through players and compare name
 
@@ -255,6 +255,7 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 				//check what we need to change
 				if (modType == "name")
 				{
+
 					strcpy_s(p.playerName, Player::NAME_LENGTH, ModifyPlayerNamePrompt().c_str());
 
 					
@@ -262,20 +263,21 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 					//Overwrite name
 
 					file.write((const char*)&p, playerSize);
-					file.close();
-					return;
+					complete = true;
+					
 				}
-				else if (modType == "highscore")
+				else if (modType == "highscore" || modType == "score")
 				{
 					p.highScore = ModifyHighScorePrompt();
 
 					//Overwrite Score
 					file.write((const char*)&p, playerSize);
-					file.close();
-					return;
+					complete = true;
+					
 				}
 
-				
+				if (complete)
+					break;
 			}
 		}
 
