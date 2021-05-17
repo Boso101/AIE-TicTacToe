@@ -71,20 +71,14 @@ struct Database
 
 
 	/// <summary>
-	/// Tries to find a player via binary search with the passed high score.
+	/// Tries to find a player via binary search with the passed name
 	/// </summary>
 	/// <param name="highScore"></param>
+	/// <return> a boolean whether it foudn the target name </return>
 
-	void BinarySearchPlayer(unsigned int highScore);
+	// We pass an int reference so we can change it
+	bool BinarySearchPlayer(const std::string& target, unsigned int& positionHolder);
 
-
-	//TODO: Name Version
-	/// <summary>
-	/// The actual binary search recursive algorithm
-	/// </summary>
-	/// <param name="playerArray"></param>
-	/// <returns>The index of the found player</returns>
-	int BinarySearch(Player* playerList, int left, int right, unsigned int targetScore);
 
 
 

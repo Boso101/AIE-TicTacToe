@@ -71,20 +71,20 @@ bool Database::ReadFile(const char* file)
 			return false;
 		}
 
-		std::cout << "Sucessfully Loaded " << loadedPlayerCount << " Players." << std::endl;
 
 
 		//Match the count from the file
 		this->loadedPlayerCount = currentPlayersInUse;
 
-		
+		std::cout << "Sucessfully Loaded " << loadedPlayerCount << " Players." << std::endl;
+
 		//Read the array of players
 		fileS.read((char*)loadedPlayers, currentPlayersInUse * sizeof(Player) );
 
 
 
 		//Give it a sort just incase
-	    BubbleSortPlayersByName(loadedPlayers, '>');
+	    BubbleSortPlayersByName(loadedPlayers, '<');
 		fileS.close();
 		return true;
 	}
@@ -124,7 +124,7 @@ void Database::BubbleSortPlayersByScore(Player* playerList, char op)
 	//		}
 	//	}
 
-	if (op == '>')
+	if (op == '<')
 	{
 		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount, ComparePlayerScoreDesc);
 
@@ -166,7 +166,7 @@ void Database::BubbleSortPlayersByName(Player* playerList, char op)
 	//	}
 	//}
 
-	if (op == '>')
+	if (op == '<')
 	{
 		std::sort(loadedPlayers, loadedPlayers + loadedPlayerCount, ComparePlayerNameDesc);
 
@@ -292,6 +292,46 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 	ReadFile(FILE_NAME);
 }
 
+bool Database::BinarySearchPlayer(const std::string& target, unsigned int& positionHolder)
+{
+
+	//Sort before we do anything although this is a bit iffy
+	BubbleSortPlayersByName(loadedPlayers, '>');
+
+	unsigned left = 0;
+	unsigned right = loadedPlayerCount - 1;
+	unsigned middle = 0;
+
+	while (left <= right)
+	{
+		middle = (left + right) / 2;
+
+		//Check if we found our target
+		if (target == loadedPlayers[middle].GetName())
+		{
+			//Make position holder hold the index of it
+			positionHolder = middle;
+			return true;
+		}
+
+		// Less than
+		else if (target < loadedPlayers[middle].GetName())
+		{
+			// 1 infront of our current pos
+			right = middle - 1;
+		}
+
+		else if (target > loadedPlayers[middle].GetName())
+		{
+			left = middle + 1;
+		}
+
+	}
+
+	//We could not find it
+	return false;
+}
+
 unsigned int Database::ModifyHighScorePrompt()
 {
 	unsigned int newScore;
@@ -359,58 +399,8 @@ void Database::AddPlayer(Player& player)
 }
 
 
-void Database::BinarySearchPlayer(unsigned int highScore)
-{
-	// Sort first
-	BubbleSortPlayersByName(loadedPlayers, '>');
 
 
-	int element = BinarySearch(loadedPlayers, 0, loadedPlayerCount - 1, highScore);
-
-	//Algorithm returns -1 if it did not find
-	if (element != -1)
-	{
-		std::cout << "Found an entry" << std::endl;
-		loadedPlayers[element].PrintInformation();
-	}
-	else
-	{
-		std::cout << "Could not find anyone with a highscore value of "<< highScore << std::endl;
-
-	}
-
-}
-
-//TODO: Change to name instead of targetScore
-int Database::BinarySearch(Player* playerList, int left, int right, unsigned int targetScore)
-{
-	// A recursive binary search function. It returns
-	// a reference  to the first player it finds which holds 
-	// the specified highScore
-	
-		if (right >= left) {
-			int mid = left + (right - left) / 2;
-
-			// If the element is present at the middle
-			// itself
-			if (playerList[mid].highScore == targetScore)
-				return mid;
-
-			// If element is smaller than mid, then
-			// it can only be present in left subarray
-			if (playerList[mid].highScore > targetScore)
-				return BinarySearch(playerList, left, mid - 1, targetScore);
-
-			// Else the element can only be present
-			// in right subarray
-			return BinarySearch(playerList, mid + 1, right, targetScore);
-		}
-
-		// We reach here when element is not
-		// present in array
-		return -1;
-
-}
 
 bool  Database::IsFull()
 {

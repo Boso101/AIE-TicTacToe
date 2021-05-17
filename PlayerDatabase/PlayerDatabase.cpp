@@ -163,6 +163,7 @@ int main()
 
     case(DatabaseState::MODIFY_PROFILE):
     {
+        system("CLS");
         unsigned int element;
 
         db.PrintAllPlayers();
@@ -200,10 +201,21 @@ int main()
 
     case(DatabaseState::SEARCH_PROFILE):
     {
-        unsigned int scr;
-        std::cout << "What highscore value are you searching for?\n" << std::endl;
-        std::cin >> scr;
-        db.BinarySearchPlayer(scr);
+        system("CLS");
+        unsigned int element = 0;
+        std::string targ;
+        std::cout << "What is the name of the person your are looking for?\n" << std::endl;
+        std::cin >> targ;
+        if (db.BinarySearchPlayer(targ, element))
+        {
+            std::cout << "Found Player sucessfully!\n" << std::endl;
+
+            db.loadedPlayers[element].PrintInformation();
+        }
+        else
+        {
+            std::cout << "Could not find player with the given name" << std::endl;
+        }
 
         db.state = DatabaseState::USER_INPUT;
 
@@ -261,6 +273,7 @@ int main()
     }
     case (DatabaseState::SHOW_ALL_PROFILES):
     {
+        system("CLS");
         db.PrintAllPlayers();
         db.state = DatabaseState::USER_INPUT;
         break;
