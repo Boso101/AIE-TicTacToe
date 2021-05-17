@@ -23,8 +23,7 @@ void DataFile::AddRecord(string imageFilename, string name, int age)
 	currentlyLoadedRecord.age = age;
 
 
-	//Add the record to the vector
-	//records.push_back(r);
+	
 	recordCount++;
 }
 
@@ -41,6 +40,7 @@ DataFile::Record* DataFile::GetRecord(int index)
 	//read true record count
 	infile.read((char*)&recordCount, (sizeof(int)));
 	
+	//Update our record index so that we know what to read
 	currentRecordIndex = index;
 
 	for (int i = 0; i <= currentRecordIndex; i++)
@@ -54,7 +54,7 @@ DataFile::Record* DataFile::GetRecord(int index)
 		infile.read((char*)&height, sizeof(int));
 
 
-		infile.read((char*)&nameSize, sizeof(int));
+		infile.read((char*)&nameSize, sizeof(int)+1);
 		infile.read((char*)&ageSize, sizeof(int));
 		imageSize = sizeof(Color) * width * height;
 
@@ -82,9 +82,10 @@ DataFile::Record* DataFile::GetRecord(int index)
 			currentlyLoadedRecord.name = string(name);
 			currentlyLoadedRecord.age = age;
 
-
+			//Free up some memory
 			delete[] imgdata;
 			delete[] name;
+
 			// Get out of for loop
 			break;
 		}
