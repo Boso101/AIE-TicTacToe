@@ -21,6 +21,7 @@
 
 #include "raylib.h"
 #include "DataFile.h"
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
@@ -60,7 +61,7 @@ int main(int argc, char* argv[])
             currentRecordIdx--;
             if (currentRecordIdx < 0)
             {
-                currentRecordIdx = 0;
+                currentRecordIdx = data.GetRecordCount()- 1;
             }
             currentRecord = data.GetRecord(currentRecordIdx);
           
@@ -91,6 +92,7 @@ int main(int argc, char* argv[])
 
         DrawTexture(recordTexture, 300, 50, WHITE);
 
+        DrawText(to_string(currentRecordIdx).c_str(), 10, 20, 20, LIGHTGRAY);
         DrawText("NAME", 10, 50, 20, LIGHTGRAY);
         DrawText(currentRecord->name.c_str(), 10, 80, 20, LIGHTGRAY);
 
