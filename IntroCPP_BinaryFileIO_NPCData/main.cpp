@@ -28,19 +28,19 @@ int main(int argc, char* argv[])
     //--------------------------------------------------------------------------------------
     int screenWidth = 800;
     int screenHeight = 450;
-
+    
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
     DataFile data;
+    data.Load("npc_data.dat");
     int currentRecordIdx = 0;
 
-    data.Load("npc_data.dat");
 
     // Make this load only the specified 
     DataFile::Record* currentRecord = data.GetRecord(currentRecordIdx);
    
  
-    Texture2D recordTexture;
+    Texture2D recordTexture = LoadTextureFromImage(currentRecord->image);
 
    
 

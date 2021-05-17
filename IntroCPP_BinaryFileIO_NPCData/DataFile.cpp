@@ -18,9 +18,9 @@ void DataFile::AddRecord(string imageFilename, string name, int age)
 
 	Record* r = new Record;
 	// Assign the record the passed parameters
-	r->image = i;
-	r->name = name;
-	r->age = age;
+	currentlyLoadedRecord.image = i;
+	currentlyLoadedRecord.name = name;
+	currentlyLoadedRecord.age = age;
 
 
 	//Add the record to the vector
@@ -43,7 +43,55 @@ DataFile::Record* DataFile::GetRecord(int index)
 	
 	currentRecordIndex = index;
 
-	Load(fileName);
+	for (int i = 0; i <= currentRecordIndex; i++)
+	{
+		int nameSize = 0;
+		int ageSize = 0;
+		int width = 0, height = 0, format = 0, imageSize = 0;
+
+		//Read all important fields (image data, record name and age)
+		infile.read((char*)&width, sizeof(int));
+		infile.read((char*)&height, sizeof(int));
+
+
+		infile.read((char*)&nameSize, sizeof(int));
+		infile.read((char*)&ageSize, sizeof(int));
+		imageSize = sizeof(Color) * width * height;
+
+		//Skip as no reason to load
+		if (i < currentRecordIndex)
+		{
+			//Let us jump to the record entry we want to load
+			infile.seekg(streamsize(imageSize) + streamsize(nameSize) + streamsize(ageSize), std::ios::cur);
+		}
+		else
+		{
+			// Lets load up 
+			char* imgdata = new char[imageSize];
+			infile.read(imgdata, imageSize);
+
+			Image img = LoadImageEx((Color*)imgdata, width, height);
+			char* name = new char[nameSize];
+			int age = 0;
+
+			infile.read((char*)name, nameSize);
+			infile.read((char*)&age, ageSize);
+
+			//Assign these values to our variable
+			currentlyLoadedRecord.image = img;
+			currentlyLoadedRecord.name = string(name);
+			currentlyLoadedRecord.age = age;
+
+
+			delete[] imgdata;
+			delete[] name;
+			// Get out of for loop
+			break;
+		}
+
+
+
+	}
 
 
 	
@@ -98,57 +146,8 @@ void DataFile::Load(string filename)
 	
 	//Assign the file name
 	fileName = filename;
+
 	
-
-	for (int i = 0; i <= currentRecordIndex; i++)
-	{
-		int nameSize = 0;
-		int ageSize = 0;
-		int width = 0, height = 0, format = 0, imageSize = 0;
-
-		//Read all important fields (image data, record name and age)
-		infile.read((char*)&width, sizeof(int));
-		infile.read((char*)&height, sizeof(int));
-
-		imageSize = sizeof(Color) * width * height;
-
-		infile.read((char*)&nameSize, sizeof(int));
-		infile.read((char*)&ageSize, sizeof(int));
-		
-		//Skip as no reason to load
-		if (i < currentRecordIndex)
-		{
-			//Let us jump to the record entry we want to load
-			infile.seekg(streamsize(imageSize) + streamsize(nameSize) + streamsize(ageSize), std::ios::cur);
-		}
-		else
-		{
-			// Lets load up 
-			char* imgdata = new char[imageSize];
-			infile.read(imgdata, imageSize);
-
-			Image img = LoadImageEx((Color*)imgdata, width, height);
-			char* name = new char[nameSize];
-			int age = 0;
-
-			infile.read((char*)name, nameSize);
-			infile.read((char*)&age, ageSize);
-
-			//Assign these values to our variable
-			currentlyLoadedRecord.image = img;
-			currentlyLoadedRecord.name = string(name);
-			currentlyLoadedRecord.age = age;
-	
-
-			delete[] imgdata;
-			delete[] name;
-			// Get out of for loop
-			break;
-		}
-
-
-		
-	}
 	infile.close();
 }
 
