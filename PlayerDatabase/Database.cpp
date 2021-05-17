@@ -195,12 +195,12 @@ void Database::ModifyPlayerPrompt(Player& player)
 		if (choice == "name")
 		{
 			// if we are here then we decided to modify the name
-			Database::ModifyPlayerEntry("PlayerList.bin",player,"name");
+			Database::ModifyPlayerEntry(FILE_NAME,player,"name");
 			
 		}
 		else if (choice == "score" || choice == "highscore")
 		{
-			Database::ModifyPlayerEntry("PlayerList.bin", player, "score");
+			Database::ModifyPlayerEntry(FILE_NAME, player, "score");
 
 
 		}
@@ -289,7 +289,7 @@ void Database::ModifyPlayerEntry(const char* directory, Player& toModify, const 
 	file.close();
 	
 	//Reload Database
-	ReadFile("PlayerList.bin");
+	ReadFile(FILE_NAME);
 }
 
 unsigned int Database::ModifyHighScorePrompt()

@@ -90,6 +90,9 @@ struct Database
 
 	// Limit of max players
 	const static unsigned int MAX_PLAYERS = 16;
+
+	//file name
+	const char* FILE_NAME = "PlayerList.bin";
 	
 	unsigned int maxPlayers;
 

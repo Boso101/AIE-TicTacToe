@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Database.h"
+#include <thread>
 
 int main()
 {
@@ -26,7 +27,7 @@ int main()
         std::cout << "Please decide on an action with the following commands.\n" << std::endl;
         std::cout << "== Commands == " << std::endl;
         std::cout << "add - Create a new Player Profile " << std::endl;
-        std::cout << "remove - Remove a Player Profile" << std::endl;
+        std::cout << "clear - Clear all Player Profiles from the database." << std::endl;
         std::cout << "modify - Modify an existing Player Profile " << std::endl;
         std::cout << "save - Save all Player Profiles to a file. " << std::endl;
         std::cout << "load - Load all Player Profiles from a file. " << std::endl;
@@ -123,9 +124,9 @@ int main()
             db.state = DatabaseState::SEARCH_PROFILE;
         }
 
-        else if (choice == "remove")
+        else if (choice == "clear")
         {
-            db.state = DatabaseState::REMOVE_PROFILE;
+            db.state = DatabaseState::REMOVE_PROFILES;
         }
 
         else if (choice == "load")
@@ -211,7 +212,7 @@ int main()
 
     case(DatabaseState::SAVE_PROFILES):
     {
-        db.WriteFile("PlayerList.bin");
+        db.WriteFile(db.FILE_NAME);
 
         std::cout << "Saved Sucessfully..." << std::endl;
         db.state = DatabaseState::USER_INPUT;
@@ -220,28 +221,35 @@ int main()
 
     case(DatabaseState::LOAD_PROFILES):
     {
-        db.ReadFile("PlayerList.bin");
+        db.ReadFile(db.FILE_NAME);
         db.state = DatabaseState::USER_INPUT;
         break;
     }
-    case(DatabaseState::REMOVE_PROFILE):
+    case(DatabaseState::REMOVE_PROFILES):
     {
-        unsigned int scr;
+        std::string usrInp;
         db.PrintAllPlayers();
-        std::cout << "Please input the element for the player you wish to remove.\n" << std::endl;
-        std::cin >> scr;
+        std::cout << "Are you sure you wish to clear all the player profiles?\ny = yes | n = no" << std::endl;
+        std::cin >> usrInp;
 
-        //Deletus 
-        if (scr <= db.loadedPlayerCount)
+        if (usrInp == "y" || usrInp == "yes")
         {
-           // db.loadedPlayers[scr] = *nullptr;
 
-        }
-        else
-        {
-            std::cout << "The given element does not exist in the loaded player list..." << std::endl;
+            //Flush the cmd
+            system("CLS");
+            std::cout << "Clearing all players..." << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(2));
 
+            //"Clear Players"
+
+            // this works for now
+            db.loadedPlayerCount = 0;
+
+
+            //Save File
+            db.WriteFile(db.FILE_NAME);
         }
+    
 
 
         db.state = DatabaseState::USER_INPUT;
