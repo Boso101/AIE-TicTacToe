@@ -37,9 +37,19 @@ int main(int argc, char* argv[])
     data.Load("npc_data.dat");
 
     DataFile::Record* currentRecord = data.GetRecord(currentRecordIdx);
-    Texture2D recordTexture = LoadTextureFromImage(currentRecord->image);
+   
+    //Have this so that we can cache the textures instead of having to load them over and over each time
+    vector<Texture2D> loadedTextures;
+  
 
+    // Load up all textures first
+    for (int i = 0; i < data.GetRecordCount() - 1; i++)
+    {
+        //Cache the texture
+        loadedTextures.push_back(LoadTextureFromImage(data.GetRecord(i)->image));
+    }
 
+    Texture2D recordTexture = loadedTextures.at(0);
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
 
@@ -59,7 +69,7 @@ int main(int argc, char* argv[])
                 currentRecordIdx = 0;
             }
             currentRecord = data.GetRecord(currentRecordIdx);
-            recordTexture = LoadTextureFromImage(currentRecord->image);
+            recordTexture = loadedTextures.at(currentRecordIdx);
         }
 
         if (IsKeyPressed(KEY_RIGHT))
@@ -71,7 +81,9 @@ int main(int argc, char* argv[])
                 currentRecordIdx = 0;
             }
             currentRecord = data.GetRecord(currentRecordIdx);
-            recordTexture = LoadTextureFromImage(currentRecord->image);
+            recordTexture = loadedTextures.at(currentRecordIdx);
+
+          
         }
 
 
