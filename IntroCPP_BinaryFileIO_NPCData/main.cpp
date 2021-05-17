@@ -36,28 +36,13 @@ int main(int argc, char* argv[])
 
     data.Load("npc_data.dat");
 
+    // Make this load only the specified 
     DataFile::Record* currentRecord = data.GetRecord(currentRecordIdx);
    
-    //Have this so that we can cache the textures instead of having to load them over and over each time
-    vector<Texture2D> loadedTextures;
+ 
     Texture2D recordTexture;
 
-    // Load up all textures first
-    for (int i = 0; i < data.GetRecordCount(); i++)
-    {
-        //Cache the texture
-        loadedTextures.push_back(LoadTextureFromImage(data.GetRecord(i)->image));
-    }
-
-    if (loadedTextures.size() == 0)
-    {
-        recordTexture = LoadTextureFromImage(data.GetRecord(0)->image);
-    }
-    else
-    {
-        //This might be bad if we havent had any textures stored
-        recordTexture = loadedTextures.at(0);
-    }
+   
 
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
@@ -78,7 +63,9 @@ int main(int argc, char* argv[])
                 currentRecordIdx = 0;
             }
             currentRecord = data.GetRecord(currentRecordIdx);
-            recordTexture = loadedTextures.at(currentRecordIdx);
+          
+            // this is horrible but customer doesnt want stuff like vectors stored in memory so
+            recordTexture = LoadTextureFromImage(currentRecord->image);
         }
 
         if (IsKeyPressed(KEY_RIGHT))
@@ -90,7 +77,7 @@ int main(int argc, char* argv[])
                 currentRecordIdx = 0;
             }
             currentRecord = data.GetRecord(currentRecordIdx);
-            recordTexture = loadedTextures.at(currentRecordIdx);
+            recordTexture = LoadTextureFromImage(currentRecord->image);
 
           
         }

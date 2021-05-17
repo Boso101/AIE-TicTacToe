@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include <string>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -18,8 +19,15 @@ public:
 
 private:
 	int recordCount;
-	std::vector<Record*> records;	// delete this vector. Load only the required record 
-	std::vector<Texture2D> loadedTextures;
+
+	//Currently Loaded Record
+	Record currentlyLoadedRecord;
+	
+	//Current index for our record
+	unsigned int currentRecordIndex;
+
+	std::string fileName;
+	
 
 
 
@@ -29,11 +37,7 @@ public:
 
 	void AddRecord(string imageFilename, string name, int age);
 
-	/// <summary>
-	/// Add texture to texture vector and makes sure it doesnt already exist
-	/// </summary>
-	/// <param name="text"></param>
-	void AddTexture(Texture2D text);
+
 	Record* GetRecord(int index);
 
 	/// <summary>
@@ -41,6 +45,7 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	int GetRecordCount() { return recordCount; };
+
 
 	/// <summary>
 	/// Writes to a specified file

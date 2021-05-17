@@ -24,81 +24,89 @@ void DataFile::AddRecord(string imageFilename, string name, int age)
 
 
 	//Add the record to the vector
-	records.push_back(r);
+	//records.push_back(r);
 	recordCount++;
 }
 
-void DataFile::AddTexture(Texture2D text)
-{
-	// check if we already have the texture loaded
-	if (std::find(loadedTextures.begin(), loadedTextures.end(), text) != loadedTextures.end())
-	{
-		return;
-	}
-	
-	loadedTextures.push_back(text);
-}
 
 DataFile::Record* DataFile::GetRecord(int index)
 {
-	unsigned int size = records.size() - 1;
-	//Make sure we are in the correct bounds
-	if (index > size || index < 0)
-	{
-		return records.at(0);
-	}
+	// Change the currentRecord index
 
-	return records.at(index);
+	//read some data from the file
+	ifstream infile(fileName, ios::binary);
+	
+	recordCount = 0;
+	
+	//read true record count
+	infile.read((char*)&recordCount, (sizeof(int)));
+	
+	currentRecordIndex = index;
+
+	Load(fileName);
+
+
+	
+
+	infile.close();
+	return &currentlyLoadedRecord;
 }
 
+
+//Why are we saving if we are only loading one record
 void DataFile::Save(string filename)
 {
 	ofstream outfile(filename, ios::binary);
 
-	int recordCount = records.size();
+	int recordCount = this->recordCount;
 	outfile.write((char*)&recordCount, sizeof(int));
 
-	for (int i = 0; i < recordCount; i++)
-	{		
-		Color* imgdata = GetImageData(records[i]->image);
+	//TODO: Change the position of this
+		
+	/*	Color* imgdata = GetImageData(currentlyLoadedRecord->image);
 				
-		int imageSize = sizeof(Color) * records[i]->image.width * records[i]->image.height;
-		int nameSize = records[i]->name.length();
+		int imageSize = sizeof(Color) * currentlyLoadedRecord->image.width * currentlyLoadedRecord->image.height;
+		int nameSize = currentlyLoadedRecord->name.length();
 		int ageSize = sizeof(int);
 
-		outfile.write((char*)&records[i]->image.width, sizeof(int));
-		outfile.write((char*)&records[i]->image.height, sizeof(int));
+		outfile.write((char*)&currentlyLoadedRecord->image.width, sizeof(int));
+		outfile.write((char*)&currentlyLoadedRecord->image.height, sizeof(int));
 		
 		outfile.write((char*)&nameSize, sizeof(int));
 		outfile.write((char*)&ageSize, sizeof(int));
 
 		outfile.write((char*)imgdata, imageSize);
-		outfile.write((char*)records[i]->name.c_str(), nameSize);
-		outfile.write((char*)&records[i]->age, ageSize);
-	}
+		outfile.write((char*)currentlyLoadedRecord->name.c_str(), nameSize);
+		outfile.write((char*)&currentlyLoadedRecord->age, ageSize);*/
+	
 
 	outfile.close();
 }
 
 void DataFile::Load(string filename)
 {
+	//size
+	unsigned int recordSize = sizeof(Record);
 	// Clear out our current loaded records
 	Clear();
 
 	ifstream infile(filename, ios::binary);
 
+	// Assign the recordCount
 	recordCount = 0;
 	infile.read((char*)&recordCount, sizeof(int));
+	
+	//Assign the file name
+	fileName = filename;
+	
 
-	//infile.read((char*)records, recordCount * sizeof(Record));
-
-	//
-	/*for (int i = 0; i < recordCount; i++)
-	{		
+	for (int i = 0; i <= currentRecordIndex; i++)
+	{
 		int nameSize = 0;
 		int ageSize = 0;
 		int width = 0, height = 0, format = 0, imageSize = 0;
 
+		//Read all important fields (image data, record name and age)
 		infile.read((char*)&width, sizeof(int));
 		infile.read((char*)&height, sizeof(int));
 
@@ -106,36 +114,46 @@ void DataFile::Load(string filename)
 
 		infile.read((char*)&nameSize, sizeof(int));
 		infile.read((char*)&ageSize, sizeof(int));
+		
+		//Skip as no reason to load
+		if (i < currentRecordIndex)
+		{
+			//Let us jump to the record entry we want to load
+			infile.seekg(streamsize(imageSize) + streamsize(nameSize) + streamsize(ageSize), std::ios::cur);
+		}
+		else
+		{
+			// Lets load up 
+			char* imgdata = new char[imageSize];
+			infile.read(imgdata, imageSize);
 
-		char* imgdata = new char[imageSize];
-		infile.read(imgdata, imageSize);
+			Image img = LoadImageEx((Color*)imgdata, width, height);
+			char* name = new char[nameSize];
+			int age = 0;
 
-		Image img = LoadImageEx((Color*)imgdata, width, height);
-		char* name = new char[nameSize];
-		int age = 0;
-				
-		infile.read((char*)name, nameSize);
-		infile.read((char*)&age, ageSize);
+			infile.read((char*)name, nameSize);
+			infile.read((char*)&age, ageSize);
 
-		Record* r = new Record();
-		r->image = img;
-		r->name = string(name);
-		r->age = age;
-		records.push_back(r);
+			//Assign these values to our variable
+			currentlyLoadedRecord.image = img;
+			currentlyLoadedRecord.name = string(name);
+			currentlyLoadedRecord.age = age;
+	
 
-		delete [] imgdata;
-		delete [] name;
-	}*/
+			delete[] imgdata;
+			delete[] name;
+			// Get out of for loop
+			break;
+		}
 
+
+		
+	}
 	infile.close();
 }
 
 void DataFile::Clear()
 {
-	for (int i = 0; i < records.size(); i++)
-	{
-		delete records[i];
-	}
-	records.clear();
+	fileName = "";
 	recordCount = 0;
 }
