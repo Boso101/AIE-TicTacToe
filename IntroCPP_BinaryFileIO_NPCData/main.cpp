@@ -40,16 +40,25 @@ int main(int argc, char* argv[])
    
     //Have this so that we can cache the textures instead of having to load them over and over each time
     vector<Texture2D> loadedTextures;
-  
+    Texture2D recordTexture;
 
     // Load up all textures first
-    for (int i = 0; i < data.GetRecordCount() - 1; i++)
+    for (int i = 0; i < data.GetRecordCount(); i++)
     {
         //Cache the texture
         loadedTextures.push_back(LoadTextureFromImage(data.GetRecord(i)->image));
     }
 
-    Texture2D recordTexture = loadedTextures.at(0);
+    if (loadedTextures.size() == 0)
+    {
+        recordTexture = LoadTextureFromImage(data.GetRecord(0)->image);
+    }
+    else
+    {
+        //This might be bad if we havent had any textures stored
+        recordTexture = loadedTextures.at(0);
+    }
+
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
 
