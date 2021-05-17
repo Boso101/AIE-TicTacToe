@@ -232,8 +232,11 @@ int main()
         std::cout << "Are you sure you wish to clear all the player profiles?\ny = yes | n = no" << std::endl;
         std::cin >> usrInp;
 
+
         if (usrInp == "y" || usrInp == "yes")
         {
+            // This logic should probably be in the Database class but low on time so just leave it here for now
+
 
             //Flush the cmd
             system("CLS");
