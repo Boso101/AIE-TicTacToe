@@ -54,7 +54,7 @@ DataFile::Record* DataFile::GetRecord(int index)
 		infile.read((char*)&height, sizeof(int));
 
 
-		infile.read((char*)&nameSize, sizeof(int)+1);
+		infile.read((char*)&nameSize, sizeof(int));
 		infile.read((char*)&ageSize, sizeof(int));
 		imageSize = sizeof(Color) * width * height;
 
@@ -110,23 +110,23 @@ void DataFile::Save(string filename)
 	int recordCount = this->recordCount;
 	outfile.write((char*)&recordCount, sizeof(int));
 
-	//TODO: Change the position of this
+	
 		
-	/*	Color* imgdata = GetImageData(currentlyLoadedRecord->image);
+		Color* imgdata = GetImageData(currentlyLoadedRecord.image);
 				
-		int imageSize = sizeof(Color) * currentlyLoadedRecord->image.width * currentlyLoadedRecord->image.height;
-		int nameSize = currentlyLoadedRecord->name.length();
+		int imageSize = sizeof(Color) * currentlyLoadedRecord.image.width * currentlyLoadedRecord.image.height;
+		int nameSize = currentlyLoadedRecord.name.length();
 		int ageSize = sizeof(int);
 
-		outfile.write((char*)&currentlyLoadedRecord->image.width, sizeof(int));
-		outfile.write((char*)&currentlyLoadedRecord->image.height, sizeof(int));
+		outfile.write((char*)&currentlyLoadedRecord.image.width, sizeof(int));
+		outfile.write((char*)&currentlyLoadedRecord.image.height, sizeof(int));
 		
 		outfile.write((char*)&nameSize, sizeof(int));
 		outfile.write((char*)&ageSize, sizeof(int));
 
 		outfile.write((char*)imgdata, imageSize);
-		outfile.write((char*)currentlyLoadedRecord->name.c_str(), nameSize);
-		outfile.write((char*)&currentlyLoadedRecord->age, ageSize);*/
+		outfile.write((char*)currentlyLoadedRecord.name.c_str(), nameSize);
+		outfile.write((char*)&currentlyLoadedRecord.age, ageSize);
 	
 
 	outfile.close();

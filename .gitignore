@@ -332,3 +332,23 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+Raylib/Bindings/Easings.cs
+Raylib/Bindings/Extensions.cs
+Raylib/Bindings/Physac.cs
+Raylib/Bindings/Raygui.cs
+Raylib/Bindings/Raylib.cs
+Raylib/Bindings/Raylib.projitems
+Raylib/Bindings/Raylib.shproj
+Raylib/Bindings/Raymath.cs
+Raylib/include/camera.h
+Raylib/include/config.h
+Raylib/include/easings.h
+Raylib/include/gestures.h
+Raylib/include/physac.h
+Raylib/include/raudio.h
+Raylib/include/raylib.h
+Raylib/include/raymath.h
+Raylib/include/rlgl.h
+Raylib/include/rmem.h
+Raylib/include/rnet.h
+Raylib/include/utils.h
