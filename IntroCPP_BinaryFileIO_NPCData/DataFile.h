@@ -9,7 +9,8 @@ using namespace std;
 class DataFile
 {
 public:
-	struct Record {
+	struct Record 
+	{
 		Image image;
 		string name;
 		int age;
@@ -28,9 +29,22 @@ public:
 	void AddRecord(string imageFilename, string name, int age);
 	Record* GetRecord(int index);
 
+	/// <summary>
+	/// Gets the Record Count based on the amount of loaded records
+	/// </summary>
+	/// <returns></returns>
 	int GetRecordCount() { return recordCount; };
 
+	/// <summary>
+	/// Writes to a specified file
+	/// </summary>
+	/// <param name="filename"></param>
 	void Save(string filename);
+
+	/// <summary>
+	/// Tries to load the specified file
+	/// </summary>
+	/// <param name="filename"></param>
 	void Load(string filename);
 
 private:

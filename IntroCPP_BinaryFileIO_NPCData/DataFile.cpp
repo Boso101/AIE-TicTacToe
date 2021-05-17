@@ -17,17 +17,27 @@ void DataFile::AddRecord(string imageFilename, string name, int age)
 	Image i = LoadImage(imageFilename.c_str());
 
 	Record* r = new Record;
+	// Assign the record the passed parameters
 	r->image = i;
 	r->name = name;
 	r->age = age;
 
+
+	//Add the record to the vector
 	records.push_back(r);
 	recordCount++;
 }
 
 DataFile::Record* DataFile::GetRecord(int index)
 {
-	return records[index];
+	unsigned int size = records.size() - 1;
+	//Make sure we are in the correct bounds
+	if (index > size || index < 0)
+	{
+		return records.at(0);
+	}
+
+	return records.at(index);
 }
 
 void DataFile::Save(string filename)
@@ -61,6 +71,7 @@ void DataFile::Save(string filename)
 
 void DataFile::Load(string filename)
 {
+	// Clear out our current loaded records
 	Clear();
 
 	ifstream infile(filename, ios::binary);
@@ -68,6 +79,7 @@ void DataFile::Load(string filename)
 	recordCount = 0;
 	infile.read((char*)&recordCount, sizeof(int));
 
+	//
 	for (int i = 0; i < recordCount; i++)
 	{		
 		int nameSize = 0;

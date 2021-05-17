@@ -65,9 +65,10 @@ int main(int argc, char* argv[])
         if (IsKeyPressed(KEY_RIGHT))
         {
             currentRecordIdx++;
-            if (currentRecordIdx >= data.GetRecordCount())
+            // Make sure to start again if we go out of range
+            if (currentRecordIdx > data.GetRecordCount() - 1)
             {
-                currentRecordIdx = data.GetRecordCount();
+                currentRecordIdx = 0;
             }
             currentRecord = data.GetRecord(currentRecordIdx);
             recordTexture = LoadTextureFromImage(currentRecord->image);
