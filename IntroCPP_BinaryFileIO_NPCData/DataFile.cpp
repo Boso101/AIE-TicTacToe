@@ -28,6 +28,17 @@ void DataFile::AddRecord(string imageFilename, string name, int age)
 	recordCount++;
 }
 
+void DataFile::AddTexture(Texture2D text)
+{
+	// check if we already have the texture loaded
+	if (std::find(loadedTextures.begin(), loadedTextures.end(), text) != loadedTextures.end())
+	{
+		return;
+	}
+	
+	loadedTextures.push_back(text);
+}
+
 DataFile::Record* DataFile::GetRecord(int index)
 {
 	unsigned int size = records.size() - 1;
@@ -79,8 +90,10 @@ void DataFile::Load(string filename)
 	recordCount = 0;
 	infile.read((char*)&recordCount, sizeof(int));
 
+	//infile.read((char*)records, recordCount * sizeof(Record));
+
 	//
-	for (int i = 0; i < recordCount; i++)
+	/*for (int i = 0; i < recordCount; i++)
 	{		
 		int nameSize = 0;
 		int ageSize = 0;
@@ -112,7 +125,7 @@ void DataFile::Load(string filename)
 
 		delete [] imgdata;
 		delete [] name;
-	}
+	}*/
 
 	infile.close();
 }
