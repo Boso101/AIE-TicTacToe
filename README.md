@@ -7,3 +7,5 @@
  To Compile the Database, just compile PlayerDatabase.
  
  Same with the Debugging Exercise.
+ 
+ Launch TicTacToe.sln for all the code

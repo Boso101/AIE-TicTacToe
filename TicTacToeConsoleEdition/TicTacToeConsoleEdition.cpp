@@ -5,6 +5,7 @@
 #include "../TicTacToeGameFiles/PlayerConfig.h"
 #include "../TicTacToeGameFiles/GameState.h"
 #include "../TicTacToeGameFiles/Game.h"
+#include <algorithm>
 
 /// <summary>
 /// Console version of the game 
@@ -126,12 +127,19 @@ int main()
         case GameState::FINISH:
         {
             std::string userInput = mainGame.UserInputPromptString("Play again? : ");
-            //TODO: Make lower case
+
+            // Make it so the user cant accidentally put in something uppercased
+            std::transform(userInput.begin(), userInput.end(), userInput.begin(), ::tolower);
             if (userInput == "y" || userInput == "yes")
             {
                 //Reset
                 mainGame.ChangeGameState(GameState::GAME_START);
                 mainGame.ResetGame();
+            }
+            else
+            {
+                mainGame.PrintLine("Bye bye!");
+                mainGame.running = false;
             }
         }
 
