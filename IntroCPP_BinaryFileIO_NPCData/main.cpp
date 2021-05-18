@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     data.Load("npc_data.dat");
     int currentRecordIdx = 0;
 
-    data.AddRecord("", "Joe", 21);
+    data.AddRecord("Smile.png", "Joe", 21);
     // Make this load only the specified 
     DataFile::Record* currentRecord = data.GetRecord(currentRecordIdx);
    

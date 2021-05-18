@@ -20,7 +20,7 @@
 		PlayerConfig player1;
 		PlayerConfig player2;
 
-		Player currentTurn;
+		Player currentTurn = Player::PLAYER_1;
 		GameState currentState;
 
 		bool running = true;

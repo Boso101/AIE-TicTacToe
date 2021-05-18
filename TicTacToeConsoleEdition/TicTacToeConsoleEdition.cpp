@@ -33,7 +33,7 @@ static void  PlayerInputPrompt(Game& mainGame)
 
         std::vector<BoardSlot> allFreeSlots = mainGame.GetAllFreeSlots();
         mainGame.PrintLine("Each slot is printed as {ROW,COLUMN}");
-        int choice = mainGame.UserInputPromptInt("Please enter a number correlating to the grid : ");
+        unsigned int choice = mainGame.UserInputPromptInt("Please enter a number correlating to the grid : ");
 
         //Dont let us continue
         while (std::cin.fail())

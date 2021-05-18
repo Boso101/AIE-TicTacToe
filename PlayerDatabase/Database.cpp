@@ -1,6 +1,6 @@
 #include "Database.h"
 #include <algorithm>
-#include <iostream>]
+#include <iostream>
 #include <fstream>
 
 bool Database::WriteFile(const char* directory)
@@ -19,10 +19,10 @@ bool Database::WriteFile(const char* directory)
 		file.write((const char*) & maxPlayers, sizeof(maxPlayers));
 
 		//Write players in use
-		file.write((const char*)&loadedPlayerCount, sizeof(loadedPlayerCount));
+		file.write((const char*)&loadedPlayerCount, std::streamsize(sizeof(loadedPlayerCount)));
 
 		// Write our list of players
-		file.write((const char*)loadedPlayers, loadedPlayerCount * sizeof(Player) );
+		file.write((const char*)loadedPlayers, std::streamsize(loadedPlayerCount) * std::streamsize(sizeof(Player)) );
 
 
 
@@ -438,7 +438,7 @@ void Database::PrintAllPlayers()
 {
 	std::cout << "\n" << std::endl;
 	std::cout << "==========================" << std::endl;
-	for (int i = 0; i < loadedPlayerCount; i++)
+	for (unsigned int i = 0; i < loadedPlayerCount; i++)
 	{
 		std::cout << "[" << i << "]" << " ";
 		loadedPlayers[i].PrintInformation();

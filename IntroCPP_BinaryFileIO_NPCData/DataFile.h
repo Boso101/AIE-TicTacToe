@@ -13,18 +13,18 @@ public:
 	struct Record 
 	{
 		Image image;
-		string name;
-		int age;
+		string name = "Default";
+		int age = 0;
 	};
 
 private:
-	int recordCount;
+	unsigned int recordCount = 0;
 
 	//Currently Loaded Record
 	Record currentlyLoadedRecord;
 	
 	//Current index for our record
-	unsigned int currentRecordIndex;
+	unsigned int currentRecordIndex = 0;
 
 	std::string fileName;
 	
