@@ -18,12 +18,17 @@ public:
 	};
 
 private:
+	/// <summary>
+	/// Keeps track of the size of records in the file
+	/// </summary>
 	unsigned int recordCount = 0;
 
 	//Currently Loaded Record
 	Record currentlyLoadedRecord;
 	
-	//Current index for our record
+	/// <summary>
+	/// Keeps track of the max record index
+	/// </summary>
 	unsigned int currentRecordIndex = 0;
 
 	std::string fileName;

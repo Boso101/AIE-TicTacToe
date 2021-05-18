@@ -140,7 +140,7 @@ void DataFile::Save(string filename, Record* newRecord)
 	int currIndex = 0;
 
 	// We keep jumping until we reach the memory where we put the new record entry
-	while (currIndex != recordCount-1)
+	while (currIndex != currentRecordIndex)
 	{
 		int nameSize = 0;
 		int ageSize = 0;
@@ -206,7 +206,8 @@ void DataFile::Load(string filename)
 	//Assign the file name
 	fileName = filename;
 
-
+	// So we can use this more easier in other functions
+	currentRecordIndex = recordCount - 1;
 	infile.close();
 }
 

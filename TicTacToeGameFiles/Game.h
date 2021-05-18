@@ -26,19 +26,51 @@
 		bool running = true;
 
 	
+
+		// Helper methods for printing
+
 		void Print(std::string words);
 		void PrintLine(std::string words);
 		void Print(char word);
 		void PrintGameState();
+
+		/// <summary>
+		/// Places the current turns player symbol to the specified coordinate
+		/// </summary>
+		/// <param name="row"></param>
+		/// <param name="column"></param>
 		void PlaceSymbol(int row, int column);
+
+
+		/// <summary>
+		/// Ends current players turn
+		/// </summary>
 		void EndTurn();
+
+		/// <summary>
+		/// Has a whole lot of checks to determine if the game is a draw or there is a winner
+		/// </summary>
+		/// <returns></returns>
 		bool IsThereWinner();
+
+		/// <summary>
+		/// Directly writes to the current gamestate
+		/// </summary>
+		/// <param name="state"></param>
 		void ChangeGameState(GameState state);
 		void SetCurrentTurn(Player player);
+		/// <summary>
+		/// When AI tries to do something
+		/// </summary>
 		void AIAction();
+		// For console based game - Prompt user
 		int UserInputPromptInt(std::string prompt);
 		std::string UserInputPromptString(std::string prompt);
 		void PrintAllFreeSpots();
+
+		/// <summary>
+		/// Starts the game again, clearing the board
+		/// </summary>
 		void ResetGame();
 		/// <summary>
 		/// Get the player config of whoevers turn it is
