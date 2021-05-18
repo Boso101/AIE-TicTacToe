@@ -148,10 +148,16 @@ int main()
 
         // Then prompt user to input highscore
 
-        //TODO: Make sure it is a number
         std::cout << "Player Score: ";
         std::cin >> highScore;
+        while (!std::cin.good())
+        {
+            std::cin.clear();//clears state of cin
+            std::cin.ignore(INT_MAX, '\n'); // this clears console
 
+            std::cout << "Player Score: ";
+            std::cin >> highScore;
+        }
         // Then add them to the database
         db.AddPlayer(playerName, highScore);
 

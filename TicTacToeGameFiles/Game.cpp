@@ -133,7 +133,6 @@ PlayerConfig Game::GetCurrentPlayer()
 	//Get Current Player
 	PlayerConfig currentPlayer;
 
-	//TODO: Probably change
 	if (currentTurn == Player::PLAYER_1)
 	{
 		currentPlayer = player1;
@@ -261,8 +260,7 @@ void Game::AIAction()
 
 
 }
-//TODO: Not sure if this is very inefficient
-// IDK if it cleans up after each use
+
 std::vector<BoardSlot> Game::GetAllFreeSlots()
 {
 	std::vector<BoardSlot> listOfSpots;

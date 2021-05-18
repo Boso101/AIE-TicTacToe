@@ -337,11 +337,18 @@ unsigned int Database::ModifyHighScorePrompt()
 	unsigned int newScore;
 	// here because we decided to change the high score
 
-	//TODO: Make sure its actually a number..
-
+	
 	std::cout << "New Score : ";
 	std::cin >> newScore;
+	// SHould be a do while but oh well
+	while (!std::cin.good())
+	{
+		std::cin.clear();//clears state of cin
+		std::cin.ignore(INT_MAX, '\n'); // this clears console
 
+		std::cout << "New Score : ";
+		std::cin >> newScore;
+	}
 	if (newScore < 0)
 	{
 		newScore = 0;

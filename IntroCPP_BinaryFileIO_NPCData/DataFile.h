@@ -51,7 +51,7 @@ public:
 	/// Writes to a specified file
 	/// </summary>
 	/// <param name="filename"></param>
-	void Save(string filename);
+	void Save(string filename, Record* newRec);
 
 	/// <summary>
 	/// Tries to load the specified file

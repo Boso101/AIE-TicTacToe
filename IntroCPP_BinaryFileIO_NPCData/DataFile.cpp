@@ -16,15 +16,21 @@ void DataFile::AddRecord(string imageFilename, string name, int age)
 {
 	Image i = LoadImage(imageFilename.c_str());
 
-	
-	// Assign the record the passed parameters
-	currentlyLoadedRecord.image = i;
-	currentlyLoadedRecord.name = name;
-	currentlyLoadedRecord.age = age;
+	Record* record = new Record;
+
+	record->image = i;
+	record->name = name;
+	record->age = age;
 
 
 	
 	recordCount++;
+
+	//Save
+	Save(fileName, record);
+
+	//Free memory
+	delete record;
 }
 
 
@@ -73,6 +79,7 @@ DataFile::Record* DataFile::GetRecord(int index)
 			Image img = LoadImageEx((Color*)imgdata, width, height);
 
 			char* name = new char[nameSize];
+	
 			int age = 0;
 
 			//Here we fix name problem by increasing how much is read from the name
@@ -109,34 +116,57 @@ DataFile::Record* DataFile::GetRecord(int index)
 }
 
 
-//Why are we saving if we are only loading one record
-void DataFile::Save(string filename)
+
+void DataFile::Save(string filename, Record* newRecord)
 {
-	ofstream outfile(filename, ios::binary);
+	ofstream outfile(filename, ios::binary | fstream::in | fstream::out);
 
 	int recordCount = this->recordCount;
+
+	//Write out the new record count
+
+	//Offset 0 of file is the record count
 	outfile.write((char*)&recordCount, sizeof(int));
 
+
+	// Here we take from our passed character
+	Color* imgdata = GetImageData(newRecord->image);
+
+	int imageSize = sizeof(Color) * newRecord->image.width * newRecord->image.height;
+	int nameSize = newRecord->name.length();
+	int ageSize = sizeof(int);
+	int currIndex = 0;
 	
-		
-		Color* imgdata = GetImageData(currentlyLoadedRecord.image);
-				
-		int imageSize = sizeof(Color) * currentlyLoadedRecord.image.width * currentlyLoadedRecord.image.height;
-		int nameSize = currentlyLoadedRecord.name.length();
-		int ageSize = sizeof(int);
+	
+	while (currIndex != recordCount)
+	{
+		//Let us jump to the record entry we want to load
+		outfile.seekp(streamsize(imageSize) + streamsize(nameSize) + streamsize(ageSize), std::ios::cur);
+		currIndex++;
+	}
+	//Jump one more time
+	outfile.seekp(streamsize(imageSize) + streamsize(nameSize) + streamsize(ageSize), std::ios::cur);
 
-		outfile.write((char*)&currentlyLoadedRecord.image.width, sizeof(int));
-		outfile.write((char*)&currentlyLoadedRecord.image.height, sizeof(int));
-		
-		outfile.write((char*)&nameSize, sizeof(int));
-		outfile.write((char*)&ageSize, sizeof(int));
+			//We are at the final element
+			// New Space for the new entry
+		//	outfile.seekp(streamsize(imageSize) + streamsize(nameSize) + streamsize(ageSize), std::ios::cur);
+			// Writing the data
 
-		outfile.write((char*)imgdata, imageSize);
-		outfile.write((char*)currentlyLoadedRecord.name.c_str(), nameSize);
-		outfile.write((char*)&currentlyLoadedRecord.age, ageSize);
+			outfile.write((char*)&newRecord->image.width, sizeof(int));
+			outfile.write((char*)&newRecord->image.height, sizeof(int));
+
+			outfile.write((char*)&nameSize, sizeof(int));
+			outfile.write((char*)&ageSize, sizeof(int));
+
+			outfile.write((char*)imgdata, imageSize);
+			outfile.write((char*)newRecord->name.c_str(), nameSize);
+			outfile.write((char*)&newRecord->age, ageSize);
+
+		
 	
 
 	outfile.close();
+
 }
 
 void DataFile::Load(string filename)
