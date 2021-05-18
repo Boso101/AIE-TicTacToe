@@ -71,15 +71,22 @@ DataFile::Record* DataFile::GetRecord(int index)
 			infile.read(imgdata, imageSize);
 
 			Image img = LoadImageEx((Color*)imgdata, width, height);
+
 			char* name = new char[nameSize];
 			int age = 0;
 
+			//Here we fix name problem by increasing how much is read from the name
 			infile.read((char*)name, nameSize);
 			infile.read((char*)&age, ageSize);
 
+			// Set final element to null terminator so that the string comes out nicely
+			std::string fixedName = name;
+			fixedName[nameSize] = '\0';
+			
+
 			//Assign these values to our variable
 			currentlyLoadedRecord.image = img;
-			currentlyLoadedRecord.name = string(name);
+			currentlyLoadedRecord.name = fixedName.c_str();
 			currentlyLoadedRecord.age = age;
 
 			//Free up some memory
