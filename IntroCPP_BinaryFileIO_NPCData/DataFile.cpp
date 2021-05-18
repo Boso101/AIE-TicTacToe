@@ -16,7 +16,7 @@ void DataFile::AddRecord(string imageFilename, string name, int age)
 {
 	Image i = LoadImage(imageFilename.c_str());
 
-	Record* r = new Record;
+	
 	// Assign the record the passed parameters
 	currentlyLoadedRecord.image = i;
 	currentlyLoadedRecord.name = name;

@@ -79,7 +79,7 @@ bool Database::ReadFile(const char* file)
 		std::cout << "Sucessfully Loaded " << loadedPlayerCount << " Players." << std::endl;
 
 		//Read the array of players
-		fileS.read((char*)loadedPlayers, currentPlayersInUse * sizeof(Player) );
+		fileS.read((char*)loadedPlayers, (std::streamsize(currentPlayersInUse)) * std::streamsize(sizeof(Player)) );
 
 
 
